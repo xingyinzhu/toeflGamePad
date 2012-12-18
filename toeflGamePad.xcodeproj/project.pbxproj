@@ -1,0 +1,299 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEEF66AD1680926500DFD157 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66AC1680926500DFD157 /* UIKit.framework */; };
+		BEEF66AF1680926500DFD157 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66AE1680926500DFD157 /* Foundation.framework */; };
+		BEEF66B11680926500DFD157 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66B01680926500DFD157 /* CoreGraphics.framework */; };
+		BEEF66B71680926500DFD157 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66B51680926500DFD157 /* InfoPlist.strings */; };
+		BEEF66B91680926500DFD157 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF66B81680926500DFD157 /* main.m */; };
+		BEEF66BD1680926500DFD157 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF66BC1680926500DFD157 /* AppDelegate.m */; };
+		BEEF66BF1680926500DFD157 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66BE1680926500DFD157 /* Default.png */; };
+		BEEF66C11680926500DFD157 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C01680926500DFD157 /* Default@2x.png */; };
+		BEEF66C31680926500DFD157 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C21680926500DFD157 /* Default-568h@2x.png */; };
+		BEEF66C61680926500DFD157 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF66C51680926500DFD157 /* ViewController.m */; };
+		BEEF66C91680926500DFD157 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C71680926500DFD157 /* ViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BEEF66A81680926500DFD157 /* toeflGamePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toeflGamePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEEF66AC1680926500DFD157 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BEEF66AE1680926500DFD157 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BEEF66B01680926500DFD157 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BEEF66B41680926500DFD157 /* toeflGamePad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "toeflGamePad-Info.plist"; sourceTree = "<group>"; };
+		BEEF66B61680926500DFD157 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEEF66B81680926500DFD157 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BEEF66BA1680926500DFD157 /* toeflGamePad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toeflGamePad-Prefix.pch"; sourceTree = "<group>"; };
+		BEEF66BB1680926500DFD157 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BEEF66BC1680926500DFD157 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BEEF66BE1680926500DFD157 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		BEEF66C01680926500DFD157 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BEEF66C21680926500DFD157 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BEEF66C41680926500DFD157 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BEEF66C51680926500DFD157 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BEEF66C81680926500DFD157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEEF66A51680926500DFD157 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEEF66AD1680926500DFD157 /* UIKit.framework in Frameworks */,
+				BEEF66AF1680926500DFD157 /* Foundation.framework in Frameworks */,
+				BEEF66B11680926500DFD157 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEEF669D1680926500DFD157 = {
+			isa = PBXGroup;
+			children = (
+				BEEF66B21680926500DFD157 /* toeflGamePad */,
+				BEEF66AB1680926500DFD157 /* Frameworks */,
+				BEEF66A91680926500DFD157 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEEF66A91680926500DFD157 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEEF66A81680926500DFD157 /* toeflGamePad.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEEF66AB1680926500DFD157 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEEF66AC1680926500DFD157 /* UIKit.framework */,
+				BEEF66AE1680926500DFD157 /* Foundation.framework */,
+				BEEF66B01680926500DFD157 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEEF66B21680926500DFD157 /* toeflGamePad */ = {
+			isa = PBXGroup;
+			children = (
+				BEEF66BB1680926500DFD157 /* AppDelegate.h */,
+				BEEF66BC1680926500DFD157 /* AppDelegate.m */,
+				BEEF66C41680926500DFD157 /* ViewController.h */,
+				BEEF66C51680926500DFD157 /* ViewController.m */,
+				BEEF66C71680926500DFD157 /* ViewController.xib */,
+				BEEF66B31680926500DFD157 /* Supporting Files */,
+			);
+			path = toeflGamePad;
+			sourceTree = "<group>";
+		};
+		BEEF66B31680926500DFD157 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEEF66B41680926500DFD157 /* toeflGamePad-Info.plist */,
+				BEEF66B51680926500DFD157 /* InfoPlist.strings */,
+				BEEF66B81680926500DFD157 /* main.m */,
+				BEEF66BA1680926500DFD157 /* toeflGamePad-Prefix.pch */,
+				BEEF66BE1680926500DFD157 /* Default.png */,
+				BEEF66C01680926500DFD157 /* Default@2x.png */,
+				BEEF66C21680926500DFD157 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEEF66A71680926500DFD157 /* toeflGamePad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEEF66CC1680926500DFD157 /* Build configuration list for PBXNativeTarget "toeflGamePad" */;
+			buildPhases = (
+				BEEF66A41680926500DFD157 /* Sources */,
+				BEEF66A51680926500DFD157 /* Frameworks */,
+				BEEF66A61680926500DFD157 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = toeflGamePad;
+			productName = toeflGamePad;
+			productReference = BEEF66A81680926500DFD157 /* toeflGamePad.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEEF669F1680926500DFD157 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Xingyin Zhu";
+			};
+			buildConfigurationList = BEEF66A21680926500DFD157 /* Build configuration list for PBXProject "toeflGamePad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BEEF669D1680926500DFD157;
+			productRefGroup = BEEF66A91680926500DFD157 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEEF66A71680926500DFD157 /* toeflGamePad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEEF66A61680926500DFD157 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEEF66B71680926500DFD157 /* InfoPlist.strings in Resources */,
+				BEEF66BF1680926500DFD157 /* Default.png in Resources */,
+				BEEF66C11680926500DFD157 /* Default@2x.png in Resources */,
+				BEEF66C31680926500DFD157 /* Default-568h@2x.png in Resources */,
+				BEEF66C91680926500DFD157 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEEF66A41680926500DFD157 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEEF66B91680926500DFD157 /* main.m in Sources */,
+				BEEF66BD1680926500DFD157 /* AppDelegate.m in Sources */,
+				BEEF66C61680926500DFD157 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BEEF66B51680926500DFD157 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEEF66B61680926500DFD157 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BEEF66C71680926500DFD157 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEEF66C81680926500DFD157 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEEF66CA1680926500DFD157 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BEEF66CB1680926500DFD157 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEEF66CD1680926500DFD157 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "toeflGamePad/toeflGamePad-Prefix.pch";
+				INFOPLIST_FILE = "toeflGamePad/toeflGamePad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BEEF66CE1680926500DFD157 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "toeflGamePad/toeflGamePad-Prefix.pch";
+				INFOPLIST_FILE = "toeflGamePad/toeflGamePad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEEF66A21680926500DFD157 /* Build configuration list for PBXProject "toeflGamePad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEEF66CA1680926500DFD157 /* Debug */,
+				BEEF66CB1680926500DFD157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEEF66CC1680926500DFD157 /* Build configuration list for PBXNativeTarget "toeflGamePad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEEF66CD1680926500DFD157 /* Debug */,
+				BEEF66CE1680926500DFD157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEEF669F1680926500DFD157 /* Project object */;
+}
