@@ -7,16 +7,18 @@
 //
 
 #import "AppDelegate.h"
-
-#import "ViewController.h"
+#import "DictHelper.h"
+#import "StartViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self startLoadDict];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    self.viewController = [[StartViewController alloc] initWithNibName:@"StartViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -47,6 +49,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)startLoadDict
+{
+    [DictHelper StartInitDict];
+    [DictHelper LoadDict];
 }
 
 @end

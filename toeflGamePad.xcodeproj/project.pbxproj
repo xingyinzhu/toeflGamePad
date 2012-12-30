@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE298D74168338DD00B42D8F /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D72168338DD00B42D8F /* CategoryViewController.m */; };
+		BE298D75168338DD00B42D8F /* CategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE298D73168338DD00B42D8F /* CategoryViewController.xib */; };
+		BE298D991683482700B42D8F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D901683482700B42D8F /* FMDatabase.m */; };
+		BE298D9A1683482700B42D8F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D921683482700B42D8F /* FMDatabaseAdditions.m */; };
+		BE298D9B1683482700B42D8F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D941683482700B42D8F /* FMDatabasePool.m */; };
+		BE298D9C1683482700B42D8F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D961683482700B42D8F /* FMDatabaseQueue.m */; };
+		BE298D9D1683482700B42D8F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BE298D981683482700B42D8F /* FMResultSet.m */; };
+		BED5E2FA168FD08200B12CCB /* dict.db in Resources */ = {isa = PBXBuildFile; fileRef = BED5E2F9168FD08200B12CCB /* dict.db */; };
+		BEDBDA9D168C799300223998 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBDA9C168C799300223998 /* Word.m */; };
+		BEDBDAA9168C7B4F00223998 /* DictHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBDAA8168C7B4F00223998 /* DictHelper.m */; };
 		BEEF66AD1680926500DFD157 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66AC1680926500DFD157 /* UIKit.framework */; };
 		BEEF66AF1680926500DFD157 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66AE1680926500DFD157 /* Foundation.framework */; };
 		BEEF66B11680926500DFD157 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEF66B01680926500DFD157 /* CoreGraphics.framework */; };
@@ -16,11 +26,34 @@
 		BEEF66BF1680926500DFD157 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66BE1680926500DFD157 /* Default.png */; };
 		BEEF66C11680926500DFD157 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C01680926500DFD157 /* Default@2x.png */; };
 		BEEF66C31680926500DFD157 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C21680926500DFD157 /* Default-568h@2x.png */; };
-		BEEF66C61680926500DFD157 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF66C51680926500DFD157 /* ViewController.m */; };
-		BEEF66C91680926500DFD157 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C71680926500DFD157 /* ViewController.xib */; };
+		BEEF66C61680926500DFD157 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF66C51680926500DFD157 /* StartViewController.m */; };
+		BEEF66C91680926500DFD157 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEF66C71680926500DFD157 /* StartViewController.xib */; };
+		BEF9D65016872EB800A9F2EA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF9D64F16872EB800A9F2EA /* libsqlite3.dylib */; };
+		BEF9D65916873FCD00A9F2EA /* WordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF9D65716873FCD00A9F2EA /* WordListViewController.m */; };
+		BEF9D65A16873FCD00A9F2EA /* WordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF9D65816873FCD00A9F2EA /* WordListViewController.xib */; };
+		BEF9D65E168744CB00A9F2EA /* GamePadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF9D65C168744CB00A9F2EA /* GamePadViewController.m */; };
+		BEF9D65F168744CB00A9F2EA /* GamePadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF9D65D168744CB00A9F2EA /* GamePadViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE298D71168338DD00B42D8F /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
+		BE298D72168338DD00B42D8F /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		BE298D73168338DD00B42D8F /* CategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryViewController.xib; sourceTree = "<group>"; };
+		BE298D8F1683482700B42D8F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		BE298D901683482700B42D8F /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		BE298D911683482700B42D8F /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		BE298D921683482700B42D8F /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		BE298D931683482700B42D8F /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		BE298D941683482700B42D8F /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		BE298D951683482700B42D8F /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		BE298D961683482700B42D8F /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		BE298D971683482700B42D8F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		BE298D981683482700B42D8F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		BED5E2F9168FD08200B12CCB /* dict.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = dict.db; path = ../dict.db; sourceTree = "<group>"; };
+		BEDBDA9B168C799300223998 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		BEDBDA9C168C799300223998 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		BEDBDAA7168C7B4F00223998 /* DictHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictHelper.h; sourceTree = "<group>"; };
+		BEDBDAA8168C7B4F00223998 /* DictHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictHelper.m; sourceTree = "<group>"; };
 		BEEF66A81680926500DFD157 /* toeflGamePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toeflGamePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEEF66AC1680926500DFD157 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEEF66AE1680926500DFD157 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -34,9 +67,16 @@
 		BEEF66BE1680926500DFD157 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BEEF66C01680926500DFD157 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BEEF66C21680926500DFD157 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		BEEF66C41680926500DFD157 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BEEF66C51680926500DFD157 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		BEEF66C81680926500DFD157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		BEEF66C41680926500DFD157 /* StartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		BEEF66C51680926500DFD157 /* StartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		BEEF66C81680926500DFD157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/StartViewController.xib; sourceTree = "<group>"; };
+		BEF9D64F16872EB800A9F2EA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BEF9D65616873FCD00A9F2EA /* WordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordListViewController.h; sourceTree = "<group>"; };
+		BEF9D65716873FCD00A9F2EA /* WordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordListViewController.m; sourceTree = "<group>"; };
+		BEF9D65816873FCD00A9F2EA /* WordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordListViewController.xib; sourceTree = "<group>"; };
+		BEF9D65B168744CB00A9F2EA /* GamePadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePadViewController.h; sourceTree = "<group>"; };
+		BEF9D65C168744CB00A9F2EA /* GamePadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePadViewController.m; sourceTree = "<group>"; };
+		BEF9D65D168744CB00A9F2EA /* GamePadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamePadViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF9D65016872EB800A9F2EA /* libsqlite3.dylib in Frameworks */,
 				BEEF66AD1680926500DFD157 /* UIKit.framework in Frameworks */,
 				BEEF66AF1680926500DFD157 /* Foundation.framework in Frameworks */,
 				BEEF66B11680926500DFD157 /* CoreGraphics.framework in Frameworks */,
@@ -53,9 +94,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE298D8E1683482700B42D8F /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				BE298D8F1683482700B42D8F /* FMDatabase.h */,
+				BE298D901683482700B42D8F /* FMDatabase.m */,
+				BE298D911683482700B42D8F /* FMDatabaseAdditions.h */,
+				BE298D921683482700B42D8F /* FMDatabaseAdditions.m */,
+				BE298D931683482700B42D8F /* FMDatabasePool.h */,
+				BE298D941683482700B42D8F /* FMDatabasePool.m */,
+				BE298D951683482700B42D8F /* FMDatabaseQueue.h */,
+				BE298D961683482700B42D8F /* FMDatabaseQueue.m */,
+				BE298D971683482700B42D8F /* FMResultSet.h */,
+				BE298D981683482700B42D8F /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
 		BEEF669D1680926500DFD157 = {
 			isa = PBXGroup;
 			children = (
+				BE298D8E1683482700B42D8F /* FMDB */,
 				BEEF66B21680926500DFD157 /* toeflGamePad */,
 				BEEF66AB1680926500DFD157 /* Frameworks */,
 				BEEF66A91680926500DFD157 /* Products */,
@@ -73,6 +132,7 @@
 		BEEF66AB1680926500DFD157 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEF9D64F16872EB800A9F2EA /* libsqlite3.dylib */,
 				BEEF66AC1680926500DFD157 /* UIKit.framework */,
 				BEEF66AE1680926500DFD157 /* Foundation.framework */,
 				BEEF66B01680926500DFD157 /* CoreGraphics.framework */,
@@ -85,9 +145,22 @@
 			children = (
 				BEEF66BB1680926500DFD157 /* AppDelegate.h */,
 				BEEF66BC1680926500DFD157 /* AppDelegate.m */,
-				BEEF66C41680926500DFD157 /* ViewController.h */,
-				BEEF66C51680926500DFD157 /* ViewController.m */,
-				BEEF66C71680926500DFD157 /* ViewController.xib */,
+				BEEF66C41680926500DFD157 /* StartViewController.h */,
+				BEEF66C51680926500DFD157 /* StartViewController.m */,
+				BEEF66C71680926500DFD157 /* StartViewController.xib */,
+				BE298D71168338DD00B42D8F /* CategoryViewController.h */,
+				BE298D72168338DD00B42D8F /* CategoryViewController.m */,
+				BE298D73168338DD00B42D8F /* CategoryViewController.xib */,
+				BEF9D65616873FCD00A9F2EA /* WordListViewController.h */,
+				BEF9D65716873FCD00A9F2EA /* WordListViewController.m */,
+				BEF9D65816873FCD00A9F2EA /* WordListViewController.xib */,
+				BEF9D65B168744CB00A9F2EA /* GamePadViewController.h */,
+				BEF9D65C168744CB00A9F2EA /* GamePadViewController.m */,
+				BEF9D65D168744CB00A9F2EA /* GamePadViewController.xib */,
+				BEDBDA9B168C799300223998 /* Word.h */,
+				BEDBDA9C168C799300223998 /* Word.m */,
+				BEDBDAA7168C7B4F00223998 /* DictHelper.h */,
+				BEDBDAA8168C7B4F00223998 /* DictHelper.m */,
 				BEEF66B31680926500DFD157 /* Supporting Files */,
 			);
 			path = toeflGamePad;
@@ -103,6 +176,7 @@
 				BEEF66BE1680926500DFD157 /* Default.png */,
 				BEEF66C01680926500DFD157 /* Default@2x.png */,
 				BEEF66C21680926500DFD157 /* Default-568h@2x.png */,
+				BED5E2F9168FD08200B12CCB /* dict.db */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -158,11 +232,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BED5E2FA168FD08200B12CCB /* dict.db in Resources */,
 				BEEF66B71680926500DFD157 /* InfoPlist.strings in Resources */,
 				BEEF66BF1680926500DFD157 /* Default.png in Resources */,
 				BEEF66C11680926500DFD157 /* Default@2x.png in Resources */,
 				BEEF66C31680926500DFD157 /* Default-568h@2x.png in Resources */,
-				BEEF66C91680926500DFD157 /* ViewController.xib in Resources */,
+				BEEF66C91680926500DFD157 /* StartViewController.xib in Resources */,
+				BE298D75168338DD00B42D8F /* CategoryViewController.xib in Resources */,
+				BEF9D65A16873FCD00A9F2EA /* WordListViewController.xib in Resources */,
+				BEF9D65F168744CB00A9F2EA /* GamePadViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +253,17 @@
 			files = (
 				BEEF66B91680926500DFD157 /* main.m in Sources */,
 				BEEF66BD1680926500DFD157 /* AppDelegate.m in Sources */,
-				BEEF66C61680926500DFD157 /* ViewController.m in Sources */,
+				BEEF66C61680926500DFD157 /* StartViewController.m in Sources */,
+				BE298D74168338DD00B42D8F /* CategoryViewController.m in Sources */,
+				BE298D991683482700B42D8F /* FMDatabase.m in Sources */,
+				BE298D9A1683482700B42D8F /* FMDatabaseAdditions.m in Sources */,
+				BE298D9B1683482700B42D8F /* FMDatabasePool.m in Sources */,
+				BE298D9C1683482700B42D8F /* FMDatabaseQueue.m in Sources */,
+				BE298D9D1683482700B42D8F /* FMResultSet.m in Sources */,
+				BEF9D65916873FCD00A9F2EA /* WordListViewController.m in Sources */,
+				BEF9D65E168744CB00A9F2EA /* GamePadViewController.m in Sources */,
+				BEDBDA9D168C799300223998 /* Word.m in Sources */,
+				BEDBDAA9168C7B4F00223998 /* DictHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,12 +278,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		BEEF66C71680926500DFD157 /* ViewController.xib */ = {
+		BEEF66C71680926500DFD157 /* StartViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BEEF66C81680926500DFD157 /* en */,
 			);
-			name = ViewController.xib;
+			name = StartViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -292,6 +380,7 @@
 				BEEF66CE1680926500DFD157 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
