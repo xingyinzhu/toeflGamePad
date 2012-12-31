@@ -21,6 +21,8 @@
 
 - (void)getWordLists : (NSString *)category type:(NSInteger)typeIndex;
 
-- (NSString *)getFirstWord;
++ (NSString *)getFirstWord;
+
+- (NSMutableArray *)getAllCategory;
 
 @end

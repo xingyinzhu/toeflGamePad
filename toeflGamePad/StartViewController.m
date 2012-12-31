@@ -41,9 +41,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    DictHelper *helper = [[DictHelper alloc]init];
-    NSString *test = [helper getFirstWord];
-    //NSLog(@"%@",test);
+    NSString *test = [DictHelper getFirstWord];
     self.testmark.text = test;
 }
 

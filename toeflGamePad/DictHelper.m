@@ -77,7 +77,7 @@ static FMDatabase *dictDataBase;
 
 }
 
-- (NSString *)getFirstWord
++ (NSString *)getFirstWord
 {
     NSString * sql = @"select * from words";
     FMResultSet *result = [dictDataBase executeQuery:sql];
@@ -93,5 +93,12 @@ static FMDatabase *dictDataBase;
 }
 
 
+
+- (NSMutableArray *)getAllCategory
+{
+    NSString * sql = @"select * from ";
+    
+
+}
 
 @end
