@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DictHelper;
 
 @interface CategoryViewController : UIViewController
+
 
 @end

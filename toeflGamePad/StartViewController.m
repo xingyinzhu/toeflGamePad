@@ -19,20 +19,18 @@
     WordListViewController *wordListViewController;
 }
 
-@synthesize category = _category;
+@synthesize beginButton = _beginButton;
+@synthesize howtoButton = _howtoButton;
 @synthesize testmark = _testmark;
 
-- (IBAction)categoryChoose
+- (IBAction)begin
 {
     if (wordListViewController == nil)
     {
-        
         wordListViewController = [[WordListViewController alloc]initWithNibName:@"WordListViewController" bundle:nil];
         
         wordListViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:wordListViewController animated:YES completion:nil];
-        
-        
     }
 }
 
@@ -41,8 +39,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [DictHelper loadAllWordObejctIntoDict];
     NSString *test = [DictHelper getFirstWord];
     self.testmark.text = test;
+    
+    [[self.beginButton titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
+    [[self.howtoButton titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
 }
 
 - (void)didReceiveMemoryWarning

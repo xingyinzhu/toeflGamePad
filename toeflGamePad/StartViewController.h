@@ -10,10 +10,11 @@
 
 @interface StartViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton *category;
+@property (nonatomic, weak) IBOutlet UIButton *beginButton;
+@property (nonatomic, weak) IBOutlet UIButton *howtoButton;
 
 @property (nonatomic, weak) IBOutlet UILabel *testmark;
 
-- (IBAction)categoryChoose;
+- (IBAction)begin;
 
 @end

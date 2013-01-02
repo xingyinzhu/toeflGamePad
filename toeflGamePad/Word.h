@@ -17,5 +17,15 @@
 @property (nonatomic, copy) NSString * group;
 @property (nonatomic, copy) NSString * hint;
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger progress;
+
+
+- (NSComparisonResult) compareName: (Word *)other;
+
+- (NSString *)configureForMark;
+
+- (NSString *)showInitPartWord;
+
+- (NSString *)giveOneHint: (NSString *)currentWord;
 
 @end

@@ -8,6 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GamePadViewController : UIViewController
+@interface GamePadViewController : UIViewController<UIAlertViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UIButton * back;
+@property (nonatomic, weak) IBOutlet UIButton * next;
+@property (nonatomic, weak) IBOutlet UIButton * previous;
+@property (nonatomic, weak) IBOutlet UIButton * hint;
+@property (nonatomic, weak) IBOutlet UIButton * answer;
+@property (nonatomic, weak) IBOutlet UIButton * accept;
+@property (nonatomic, weak) IBOutlet UIButton * reject;
+
+@property (nonatomic, weak) IBOutlet UILabel * word;
+@property (nonatomic, weak) IBOutlet UILabel * mark;
+@property (nonatomic, weak) IBOutlet UILabel * meangings;
+
+- (IBAction)backToCategoryView;
+- (IBAction)giveOneHint;
+- (IBAction)showPreviousWord;
+- (IBAction)showNextWord;
+- (IBAction)showAnswer;
+- (IBAction)acceptAnswer;
+- (IBAction)rejectAnswer;
+
+@property (nonatomic, strong) NSNumber * wordGroup;
 
 @end
