@@ -7,7 +7,6 @@
 //
 
 #import "WordListViewController.h"
-#import "CategoryViewController.h"
 #import "WordCell.h"
 #import "Word.h"
 #import "DictHelper.h"
@@ -28,9 +27,9 @@ static NSString * const WordCellIdentifier = @"WordCell";
 
 @implementation WordListViewController
 {
-    CategoryViewController *categoryViewController;
     DictHelper *dicthelper;
     //NSMutableArray *wordList;
+    NSInteger wordGroupInt;
     //prevent a memory leak
     __weak DetailViewController *detailViewController;
 }
@@ -38,6 +37,7 @@ static NSString * const WordCellIdentifier = @"WordCell";
 @synthesize searchBar = _searchBar;
 @synthesize tableView = _tableView;
 @synthesize segmentedControl = _segmentedControl;
+@synthesize wordGroup = _wordGroup;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,15 +68,17 @@ static NSString * const WordCellIdentifier = @"WordCell";
     {
         dicthelper = [[DictHelper alloc]init];
     }
-    
-    [dicthelper getWordsByType:0];
+    wordGroupInt  = [self.wordGroup integerValue];
+    NSLog(@"wordGroupInt : %d",wordGroupInt);
+    [dicthelper getWordsByGroupEx:wordGroupInt];
+    //[dicthelper getWordsByType:0];
     NSLog(@"in word list : %d",[dicthelper.dictArray count]);
     
     [self customizeFont];
-    
     [self.tableView reloadData];
 }
 
+/*
 - (void)showWordListViewWithDuration:(NSTimeInterval)duration
 {
     if (categoryViewController == nil)
@@ -86,7 +88,6 @@ static NSString * const WordCellIdentifier = @"WordCell";
         
         categoryViewController.view.frame = self.view.bounds;
         categoryViewController.view.alpha = 0.0f;
-        //categoryViewController.dicthelper = dicthelper;
         
         [self.view addSubview:categoryViewController.view];
         [self addChildViewController:categoryViewController];
@@ -139,7 +140,8 @@ static NSString * const WordCellIdentifier = @"WordCell";
         [self showWordListViewWithDuration:duration];
     }
 }
-
+*/
+ 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -200,6 +202,11 @@ static NSString * const WordCellIdentifier = @"WordCell";
     [dicthelper getWordsByPartOfWords:searchTerm];
 }
 
+- (IBAction)backToCategoryView
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -223,6 +230,23 @@ static NSString * const WordCellIdentifier = @"WordCell";
     
 }
 
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+
+/*
 #pragma mark segmentedControl
 - (IBAction)segmentChanged:(UISegmentedControl *)sender
 {
@@ -234,5 +258,6 @@ static NSString * const WordCellIdentifier = @"WordCell";
     [self.searchBar resignFirstResponder];
     [self.tableView reloadData];
 }
+*/
 
 @end

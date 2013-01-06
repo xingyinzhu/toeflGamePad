@@ -41,6 +41,7 @@
 		BEB4319A1693391E0014E73D /* NSMutableArray+Shuffling.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB431991693391D0014E73D /* NSMutableArray+Shuffling.m */; };
 		BEDBDA9D168C799300223998 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBDA9C168C799300223998 /* Word.m */; };
 		BEDBDAA9168C7B4F00223998 /* DictHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDBDAA8168C7B4F00223998 /* DictHelper.m */; };
+		BEE9CAF616991A8A00816726 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE9CAF516991A8A00816726 /* Category.m */; };
 		BEEBBDFD16943158007E510E /* random.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEBBDFB16943158007E510E /* random.png */; };
 		BEEBBDFE16943158007E510E /* random@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEBBDFC16943158007E510E /* random@2x.png */; };
 		BEEBBE01169435B3007E510E /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BEEBBE00169435B3007E510E /* YellowButton.png */; };
@@ -115,6 +116,8 @@
 		BEDBDA9C168C799300223998 /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		BEDBDAA7168C7B4F00223998 /* DictHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictHelper.h; sourceTree = "<group>"; };
 		BEDBDAA8168C7B4F00223998 /* DictHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictHelper.m; sourceTree = "<group>"; };
+		BEE9CAF416991A8900816726 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		BEE9CAF516991A8A00816726 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		BEEBBDFB16943158007E510E /* random.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = random.png; sourceTree = "<group>"; };
 		BEEBBDFC16943158007E510E /* random@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "random@2x.png"; sourceTree = "<group>"; };
 		BEEBBE00169435B3007E510E /* YellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowButton.png; sourceTree = "<group>"; };
@@ -262,10 +265,12 @@
 				507EFC0C169129A6000967E3 /* AboutViewController.h */,
 				507EFC0D169129A7000967E3 /* AboutViewController.m */,
 				507EFC0E169129A7000967E3 /* AboutViewController.xib */,
-				BEDBDA9B168C799300223998 /* Word.h */,
-				BEDBDA9C168C799300223998 /* Word.m */,
+				BEE9CAF416991A8900816726 /* Category.h */,
+				BEE9CAF516991A8A00816726 /* Category.m */,
 				BEDBDAA7168C7B4F00223998 /* DictHelper.h */,
 				BEDBDAA8168C7B4F00223998 /* DictHelper.m */,
+				BEDBDA9C168C799300223998 /* Word.m */,
+				BEDBDA9B168C799300223998 /* Word.h */,
 				BE4EA2941691ABD80084F05F /* WordCell.xib */,
 				BE4EA2971691AF2E0084F05F /* WordCell.h */,
 				BE4EA2981691AF2E0084F05F /* WordCell.m */,
@@ -413,6 +418,7 @@
 				BEB431971692BEC10014E73D /* GradientView.m in Sources */,
 				BEB4319A1693391E0014E73D /* NSMutableArray+Shuffling.m in Sources */,
 				BEEBBE08169444A4007E510E /* UIImage+Resize.m in Sources */,
+				BEE9CAF616991A8A00816726 /* Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

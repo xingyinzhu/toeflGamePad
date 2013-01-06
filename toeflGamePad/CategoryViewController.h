@@ -11,5 +11,15 @@
 
 @interface CategoryViewController : UIViewController
 
+typedef enum
+{
+    toeflGameReviewMode,
+    toeflGameTestMode
+}toeflGamePadMode;
+
+@property (nonatomic, assign) toeflGamePadMode myToeflGamePadMode;
+
+
+- (IBAction)backtoStartView;
 
 @end

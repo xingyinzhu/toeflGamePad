@@ -22,11 +22,14 @@
 
 + (void) loadAllWordObejctIntoDict;
 
-- (void)fetchAllCategory;
+- (NSInteger)fetchAllCategory;
 
+- (void)updateHasReviewed: (NSInteger)type;
 - (void)getWordsByType: (NSInteger)type;
+
 - (void)getWordsByPartOfWords: (NSString *)partOfWord;
 
+- (void)getWordsByGroupEx: (NSInteger)group;
 - (NSMutableArray *)getWordsByGroup: (NSInteger)group;
 
 - (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray;

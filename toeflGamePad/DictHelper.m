@@ -9,6 +9,7 @@
 #import "DictHelper.h"
 #import "FMDatabase.h"
 #import "Word.h"
+#import "Category.h"
 
 @interface DictHelper()
 
@@ -80,9 +81,9 @@ static NSMutableDictionary *allDict;
     {
         allDict = [[NSMutableDictionary alloc]init];
         
-        NSString * sql = @"select w.word, w.englishmark, w.americamark, w.meanings, p.value from words w, progress p where p.word = w.word";
+        NSString * sql = @"select w.word, w.englishmark, w.americamark, w.meanings,w.hint, p.value from words w, progress p where p.word = w.word";
         FMResultSet *result = [dictDataBase executeQuery:sql];
-        
+        int cnt = 0;
         while ([result next])
         {
             Word * tmpWord = [[Word alloc]init];
@@ -91,16 +92,20 @@ static NSMutableDictionary *allDict;
             tmpWord.americamark = [result stringForColumn:@"americamark"];
             tmpWord.meanings = [result stringForColumn:@"meanings"];
             tmpWord.progress = [result intForColumn:@"value"];
-            
+            tmpWord.hint = [result stringForColumn:@"hint"];
             [allDict setObject:tmpWord forKey:tmpWord.word];
+            cnt ++;
         }
+        NSLog(@"all word number : %d",cnt);
     }
 }
 
-- (void)fetchAllCategory
+- (NSInteger)fetchAllCategory
 {
 
     NSLog(@"in fetchAllCategory");
+    
+    NSInteger hasReviewedNumber = 0;
     
     if (self.categoryDict == nil)
     {
@@ -111,22 +116,65 @@ static NSMutableDictionary *allDict;
         while ([result next])
         {
             NSInteger attribute_id = [result intForColumn:@"attributeid"];
-            NSString * attribute_name = [result stringForColumn:@"attributename"];
-            
             NSNumber *aWrappedId = [NSNumber numberWithInteger:attribute_id];
-
-            [self.categoryDict setObject:attribute_name forKey:aWrappedId];
-            NSLog(@"%d : %@",attribute_id,attribute_name);
             
+            NSString * attribute_name = [result stringForColumn:@"attributename"];
+            NSInteger progress = [result intForColumn:@"progress"];
+            //NSNumber *aWrappedProgress = [NSNumber numberWithInteger:progress];
+            if (progress != hasNotReviewed)
+            {
+                hasReviewedNumber ++;
+            }
+            
+            
+            Category * category = [[Category alloc]init];
+            category.progress = progress;
+            category.categoryName = attribute_name;
+            
+            [self.categoryDict setObject:category forKey:aWrappedId];
+            NSLog(@"%d : %@",attribute_id,attribute_name);
         }
-        
     }
     
-    NSLog(@"%d",[self.categoryDict count]);
-
-    
+    NSLog(@"self.categoryDict count : %d",[self.categoryDict count]);
+    return hasReviewedNumber;
 }
 
+
+- (void)updateHasReviewed: (NSInteger)type
+{
+    
+    NSString * selectSql;
+    NSString * updateSql;
+    NSInteger value; 
+    selectSql = [NSString stringWithFormat:@"select progress from attribute_id where attributeid = %d",type];
+    FMResultSet * progressResult = [dictDataBase executeQuery:selectSql];
+    while ([progressResult next])
+    {
+        value = [progressResult intForColumn:@"progress"];
+        break;
+    }
+    
+    if (value == hasNotReviewed)
+    {
+        BOOL success;
+        updateSql = [NSString stringWithFormat:@"update attribute_id set progress = %d where attributeid = %d",hasReviewed,type];
+        success =  [dictDataBase executeUpdate:updateSql];
+        
+        NSNumber *aWrappedId = [NSNumber numberWithInteger:type];
+        Category * category = [self.categoryDict objectForKey:aWrappedId];
+        category.progress = hasReviewed;
+        NSLog(@"%@",updateSql);
+        if (success)
+        {
+            //[dictDataBase commit];
+        }
+        else
+        {
+            NSLog(@"FAIL");
+        }
+    }
+}
 
 + (BOOL)DictIsExist:(NSFileManager *)filemanager;
 
@@ -160,9 +208,18 @@ static NSMutableDictionary *allDict;
     }
     
     NSString * execSql = [sql stringByAppendingString:where];
+    NSLog(@"%@",execSql);
     FMResultSet *result = [dictDataBase executeQuery:execSql];
-    self.dictArray = [[NSMutableArray alloc]init];
-
+    
+    if (self.dictArray == nil)
+    {
+        self.dictArray = [[NSMutableArray alloc]init];
+    }
+    else
+    {
+        [self.dictArray removeAllObjects];
+    }
+    //int cnt = 0;
     while ([result next])
     {
         NSString * word = [result stringForColumn:@"word"];
@@ -173,9 +230,9 @@ static NSMutableDictionary *allDict;
             NSLog(@"%@",word);
         }
         [self.dictArray addObject:tmpWord];
-        
+        //cnt ++;
     }
-    
+    //NSLog(@"%d",cnt);
     [self.dictArray sortUsingSelector:@selector(compareName:)];
 }
 
@@ -183,7 +240,15 @@ static NSMutableDictionary *allDict;
 {
     NSString * selectSql = [NSString stringWithFormat:@"select word from words where word like '%@%%'",partOfWord];
     FMResultSet *result = [dictDataBase executeQuery:selectSql];
-    self.dictArray = [[NSMutableArray alloc]init];
+    if (self.dictArray == nil)
+    {
+        self.dictArray = [[NSMutableArray alloc]init];
+    }
+    else
+    {
+        [self.dictArray removeAllObjects];
+    }
+    
     while ([result next])
     {
         NSString * word = [result stringForColumn:@"word"];
@@ -199,24 +264,52 @@ static NSMutableDictionary *allDict;
     [self.dictArray sortUsingSelector:@selector(compareName:)];
 }
 
+//for WordListViewController
+- (void)getWordsByGroupEx: (NSInteger)group
+{
+    NSString * selectSql = [NSString stringWithFormat:@"select w.word from words w, attribute a where a.word = w.word and a.groups = %d", group];
+    FMResultSet *result = [dictDataBase executeQuery:selectSql];
+    
+    if (self.dictArray == nil)
+    {
+        self.dictArray = [[NSMutableArray alloc]init];
+    }
+    else
+    {
+        [self.dictArray removeAllObjects];
+    }
+    
+    while ([result next])
+    {
+        NSString * word = [result stringForColumn:@"word"];
+        Word * tmpWord = [allDict objectForKey:word];
+        
+        if (tmpWord == nil)
+        {
+            NSLog(@"%@",word);
+        }
+        
+        [self.dictArray addObject:tmpWord];
+    }
+    [self.dictArray sortUsingSelector:@selector(compareName:)];
+}
 
+
+//for GamePadViewController
 - (NSMutableArray *)getWordsByGroup: (NSInteger)group
 {
     NSMutableArray * groupWord = [[NSMutableArray alloc]init];
     
-    NSString * selectSql = [NSString stringWithFormat:@"select w.word, w.englishmark, w.americamark, w.meanings from words w, attribute a where a.word = w.word and a.groups = %d", group];
+    NSString * selectSql = [NSString stringWithFormat:@"select w.word from words w, attribute a where a.word = w.word and a.groups = %d", group];
     FMResultSet *result = [dictDataBase executeQuery:selectSql];
         
     while ([result next])
     {
-        Word * tmpWord = [[Word alloc]init];
-        tmpWord.word = [result stringForColumn:@"word"];
-        tmpWord.englishmark = [result stringForColumn:@"englishmark"];
-        tmpWord.americamark = [result stringForColumn:@"americamark"];
-        tmpWord.meanings = [result stringForColumn:@"meanings"];
         
+        NSString * word = [result stringForColumn:@"word"];
+        Word * tmpWord = [allDict objectForKey:word];
         
-        selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", tmpWord.word];
+        selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", word];
         FMResultSet * progressResult = [dictDataBase executeQuery:selectSql];
         NSInteger value;
         NSInteger goal;
@@ -227,7 +320,6 @@ static NSMutableDictionary *allDict;
             break;
         }
         
-        //NSLog(@"%d %d", value,goal);
         if (value >= goal)
         {
             continue;
@@ -267,7 +359,7 @@ static NSMutableDictionary *allDict;
         Word * tmpWord = [allDict objectForKey:tmp.word];
         tmpWord.progress = tmp.progress;
         
-        tmpWord = [allDict objectForKey:tmp.word];
+        //tmpWord = [allDict objectForKey:tmp.word];
         NSLog(@"update mem progress : %d",tmpWord.progress);
         
         if (success)

@@ -9,6 +9,10 @@
 #import "Word.h"
 
 @implementation Word
+{
+    NSUInteger showLength;
+    NSUInteger hideLength;
+}
 
 @synthesize word = _word;
 @synthesize englishmark = _englishmark;
@@ -19,6 +23,7 @@
 @synthesize type = _type;
 @synthesize progress = _progress;
 
+
 - (NSComparisonResult) compareName: (Word *)other
 {
     return [self.word localizedStandardCompare:other.word];
@@ -26,26 +31,43 @@
 
 - (NSString *)configureForMark
 {
-    
     NSString * temp = [NSString stringWithFormat:@"%s%@", "[", self.englishmark];
     return [NSString stringWithFormat:@"%@%s", temp, "]"];
+}
+
+- (NSMutableString *)configureWordByShowLengthAndHideLength
+{
+    NSMutableString * partWord = [[NSMutableString alloc]init];
+    [partWord appendString:[self.word substringToIndex:showLength]];
+    
+    
+    for (int i = 0; i < hideLength ; i++)
+    {
+        [partWord appendString:@"_"];
+    }
+    return partWord;
 
 }
 
 - (NSString *)showInitPartWord;
 {
-    NSUInteger halfLength = self.word.length / 3;
-    return [self.word substringToIndex:halfLength];
+    showLength = self.word.length * 0.25;
+    hideLength = self.word.length - showLength;
+    
+    return [self configureWordByShowLengthAndHideLength];
 }
 
 
 - (NSString *)giveOneHint: (NSString *)currentWord
 {
-    NSUInteger currentLength = currentWord.length;
-
-    if (currentLength + 1 < [self.word length] * 0.75)
+    //NSUInteger currentLength = currentWord.length;
+    
+    if (showLength + 1 < [self.word length] * 0.75)
     {
-        return [self.word substringToIndex:currentLength + 1];
+        showLength ++;
+        hideLength --;
+        
+        return [self configureWordByShowLengthAndHideLength];
     }
     else
     {

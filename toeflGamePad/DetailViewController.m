@@ -111,6 +111,14 @@
     [self.wordname setTextColor:[UIColor whiteColor]];
     self.englishmark.text = [self.word configureForMark];
     self.meanings.text = self.word.meanings;
+    if (self.word.hint == nil)
+    {
+        self.hint.text = @"暂无记忆法";
+    }
+    else
+    {
+        self.hint.text = self.word.hint;
+    }
 }
 
 

@@ -11,4 +11,7 @@
 @interface WordListViewController : UIViewController<UITableViewDataSource,
                                         UITableViewDelegate,UISearchBarDelegate>
 
+@property (nonatomic, strong) NSNumber * wordGroup;
+
+- (IBAction)backToCategoryView;
 @end

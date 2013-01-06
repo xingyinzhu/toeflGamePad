@@ -126,9 +126,9 @@
     Word * tmp = [testWords objectAtIndex:currentWordIndex];
     currentWord = [tmp showInitPartWord];
     self.word.text = currentWord;
-    [self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
+    //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
     [self.word setTextColor:[UIColor whiteColor]];
-    self.mark.text = [tmp configureForMark];
+    self.mark.text = @"";
     self.meangings.text = tmp.meanings;
 
 }
@@ -167,11 +167,12 @@
 - (IBAction)showAnswer
 {
     Word * tmp = [testWords objectAtIndex:currentWordIndex];
-    
+#pragma mark to do transition mode
     self.word.text = tmp.word;
-    [self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
+    //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
     [self.word setTextColor:[UIColor yellowColor]];
-
+    self.mark.text = [tmp configureForMark];
+    [self.mark setTextColor:[UIColor yellowColor]];
 }
 
 - (IBAction)acceptAnswer
@@ -225,8 +226,6 @@
                                    otherButtonTitles:@"Ok", nil];
     [exitAlertView setTag:2];
     [exitAlertView show];
-    //[self exitGamePad];
-    
 }
 
 - (void)updateScore
