@@ -36,9 +36,8 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     NSInteger categoryNumber;
     NSInteger hasReviewedNumber;
     DictHelper *dicthelper;
-    WordListViewController *wordListViewController;
-    GamePadViewController *gamePadViewController;
-    
+    //WordListViewController *wordListViewController;
+    //GamePadViewController *gamePadViewController;
 }
 
 @synthesize scrollView = _scrollView;
@@ -91,8 +90,13 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     [button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
+    UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
+    [button addSubview:progress];
+    
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:button];
+    
 }
 
 /*
@@ -141,6 +145,10 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         [btnLayer setBorderColor:[[UIColor yellowColor] CGColor]];
         */
         
+        UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+        progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
+        [button addSubview:progress];
+
         
         NSInteger attributeInt = [attribute_id integerValue];
         button.tag = 2000 + attributeInt;
@@ -179,25 +187,26 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     NSNumber *aWrappedId = [NSNumber numberWithInteger:categoryid];
     if ( self.myToeflGamePadMode == toeflGameTestMode)
     {
-        if (gamePadViewController == nil)
-        {
-            gamePadViewController = [[GamePadViewController alloc]initWithNibName:@"GamePadViewController" bundle:nil];
-        }
+        //if (gamePadViewController == nil)
+        //{
+        GamePadViewController * gamePadViewController = [[GamePadViewController alloc]initWithNibName:@"GamePadViewController" bundle:nil];
+        //}
         gamePadViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         gamePadViewController.wordGroup = aWrappedId;
         [self presentViewController:gamePadViewController animated:YES completion:nil];
     }
     else if (self.myToeflGamePadMode == toeflGameReviewMode)
     {
-        if (wordListViewController == nil)
-        {
-            wordListViewController = [[WordListViewController alloc]initWithNibName:@"WordListViewController" bundle:nil];
-        }
+        //if (wordListViewController == nil)
+        //{
+        WordListViewController * wordListViewController = [[WordListViewController alloc]initWithNibName:@"WordListViewController" bundle:nil];
+        //}
         wordListViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         wordListViewController.wordGroup = aWrappedId;
         [self presentViewController:wordListViewController animated:YES completion:nil];
-
+        
         [dicthelper updateHasReviewed:categoryid];
+        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 

@@ -245,6 +245,10 @@ static NSString * const WordCellIdentifier = @"WordCell";
     return UIInterfaceOrientationPortrait;
 }
 
+- (void)dealloc
+{
+    NSLog(@"in WordListViewController : dealloc %@", self);
+}
 
 /*
 #pragma mark segmentedControl
