@@ -10,6 +10,7 @@
 #import "FMDatabase.h"
 #import "Word.h"
 #import "Category.h"
+#import "NSMutableArray+Shuffling.h"
 
 @interface DictHelper()
 
@@ -296,6 +297,32 @@ static NSMutableDictionary *allDict;
 
 
 //for GamePadViewController
+
+- (BOOL)wordIsFinished: (NSString *)word
+{
+    //Word * tmpWord = [allDict objectForKey:word];
+    NSString * selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", word];
+    FMResultSet * progressResult = [dictDataBase executeQuery:selectSql];
+    NSInteger value;
+    NSInteger goal;
+
+    while ([progressResult next])
+    {
+        value = [progressResult intForColumn:@"value"];
+        goal = [progressResult intForColumn:@"goal"];
+        break;
+    }
+    
+    if (value >= goal)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 - (NSMutableArray *)getWordsByGroup: (NSInteger)group
 {
     NSMutableArray * groupWord = [[NSMutableArray alloc]init];
@@ -307,29 +334,55 @@ static NSMutableDictionary *allDict;
     {
         
         NSString * word = [result stringForColumn:@"word"];
-        Word * tmpWord = [allDict objectForKey:word];
         
-        selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", word];
-        FMResultSet * progressResult = [dictDataBase executeQuery:selectSql];
-        NSInteger value;
-        NSInteger goal;
-        while ([progressResult next])
-        {
-            value = [progressResult intForColumn:@"value"];
-            goal = [progressResult intForColumn:@"goal"];
-            break;
+        if ([self wordIsFinished:word])
+        {   
+            continue;
         }
+        else
+        {
+            Word * tmpWord = [allDict objectForKey:word];
+            [groupWord addObject:tmpWord];
+        }
+    }
+    return groupWord;
+}
+
+- (NSMutableArray *)getRandomWords
+{
+    int totalRandomNumber = 20;
+    NSMutableArray * randomWords = [[NSMutableArray alloc]initWithCapacity:totalRandomNumber];
+    NSMutableArray *  candidate = [[NSMutableArray alloc]init];
+    NSString * selectSql = @"select w.word from words w, attribute a where a.word = w.word and type = 2";
+    FMResultSet *result = [dictDataBase executeQuery:selectSql];
+    while ([result next])
+    {
+        NSString * word = [result stringForColumn:@"word"];
         
-        if (value >= goal)
+        if ([self wordIsFinished:word])
         {
             continue;
         }
         else
         {
-            [groupWord addObject:tmpWord];
+            Word * tmpWord = [allDict objectForKey:word];
+            [candidate addObject:tmpWord];
         }
     }
-    return groupWord;
+    
+    if ([candidate count] <= totalRandomNumber)
+    {
+        return candidate;
+    }
+    else
+    {
+        [candidate shuffle];
+        for (int i = 0;i < totalRandomNumber;i++)
+        {
+            [randomWords addObject:[candidate objectAtIndex:i]];
+        }
+        return randomWords;
+    }
 }
 
 - (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray

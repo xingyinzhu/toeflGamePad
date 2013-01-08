@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50273510169BFBE300999F41 /* toefl.html in Resources */ = {isa = PBXBuildFile; fileRef = 5027350F169BFBE300999F41 /* toefl.html */; };
 		507EFBFD1691255C000967E3 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBEF1691255C000967E3 /* back.png */; };
 		507EFBFE1691255C000967E3 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBF01691255C000967E3 /* back@2x.png */; };
 		507EFBFF1691255C000967E3 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBF11691255C000967E3 /* check.png */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5027350F169BFBE300999F41 /* toefl.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = toefl.html; path = ../toefl.html; sourceTree = "<group>"; };
 		507EFBEF1691255C000967E3 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		507EFBF01691255C000967E3 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		507EFBF11691255C000967E3 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		BEEF66B31680926500DFD157 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5027350F169BFBE300999F41 /* toefl.html */,
 				BEEBBE11169462B9007E510E /* Knewave-Regular.ttf */,
 				BEEBBE0F169462A6007E510E /* dict.db */,
 				BEEF66B41680926500DFD157 /* toeflGamePad-Info.plist */,
@@ -389,6 +392,7 @@
 				BEEBBE12169462B9007E510E /* Knewave-Regular.ttf in Resources */,
 				BEEBBE1716946D2B007E510E /* progressImage.png in Resources */,
 				BEEBBE1816946D2B007E510E /* trackImage.png in Resources */,
+				50273510169BFBE300999F41 /* toefl.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

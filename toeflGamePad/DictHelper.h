@@ -31,6 +31,7 @@
 
 - (void)getWordsByGroupEx: (NSInteger)group;
 - (NSMutableArray *)getWordsByGroup: (NSInteger)group;
+- (NSMutableArray *)getRandomWords;
 
 - (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray;
 @end

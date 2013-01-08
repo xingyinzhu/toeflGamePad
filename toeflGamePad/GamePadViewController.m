@@ -49,7 +49,14 @@
     dicthelper = [[DictHelper alloc]init];
     wordGroupInt  = [self.wordGroup integerValue];
     NSLog(@"wordGroupInt : %d",wordGroupInt);
-    testWords = [dicthelper getWordsByGroup:wordGroupInt];
+    if (wordGroupInt == -1)
+    {
+        testWords = [dicthelper getRandomWords];
+    }
+    else
+    {
+        testWords = [dicthelper getWordsByGroup:wordGroupInt];
+    }
     [testWords shuffle];
     
     currentWordIndex = 0;

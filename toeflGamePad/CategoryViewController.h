@@ -13,11 +13,11 @@
 
 typedef enum
 {
-    toeflGameReviewMode,
-    toeflGameTestMode
-}toeflGamePadMode;
+    toeflReviewMode,
+    toeflTestMode
+}toeflMode;
 
-@property (nonatomic, assign) toeflGamePadMode myToeflGamePadMode;
+@property (nonatomic, assign) toeflMode myToeflMode;
 
 
 - (IBAction)backtoStartView;

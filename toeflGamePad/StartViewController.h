@@ -18,5 +18,6 @@
 
 - (IBAction)newReview;
 - (IBAction)newTest;
+- (IBAction)howTo;
 
 @end

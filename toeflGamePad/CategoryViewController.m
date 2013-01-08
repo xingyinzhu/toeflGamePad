@@ -36,13 +36,11 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     NSInteger categoryNumber;
     NSInteger hasReviewedNumber;
     DictHelper *dicthelper;
-    //WordListViewController *wordListViewController;
-    //GamePadViewController *gamePadViewController;
 }
 
 @synthesize scrollView = _scrollView;
 @synthesize pageControl = _pageControll;
-@synthesize myToeflGamePadMode = _myToeflGamePadMode;
+@synthesize myToeflMode = _myToeflGamePadMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,7 +63,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     }
     
     hasReviewedNumber = [dicthelper fetchAllCategory];
-    if (self.myToeflGamePadMode == toeflGameTestMode)
+    if (self.myToeflMode == toeflTestMode)
     {
         if (hasReviewedNumber == 0)
         {
@@ -73,17 +71,20 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         }
     }
     categoryNumber = [dicthelper.categoryDict count];
-    
-    [self tileCategoryButton];
+    if (self.myToeflMode == toeflTestMode)
+    {
+        [self tileCategoryButton4TestMode];
+    }
+    else if (self.myToeflMode == toeflReviewMode)
+    {
+        [self tileCategoryButton4ReviewMode];
+    }
 }
 
 - (void)addRandomButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0*itemWidth + marginHorz, 0*itemHeight + marginVert, buttonWidth, buttonHeight);
-    //UIImage *image = [UIImage imageNamed:@"random"];
-    //image = [image resizedImageWithBounds:CGSizeMake(48, 48)];
-    //[button setBackgroundImage:image forState:UIControlStateNormal];
     [button setTitle:[NSString stringWithFormat:@"随机"] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
     button.tag = 1999;
@@ -106,21 +107,18 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 
 }
 */
-
-- (void)tileCategoryButton
+- (void)tileCategoryButton4TestMode
 {
     int index = 0;
     int row = 1;
     int column = 0;
-    
     NSArray * attributeids = [dicthelper.categoryDict allKeys];
-    
     [self addRandomButton];
     
     for (NSNumber *attribute_id in attributeids)
     {
         Category * category = [dicthelper.categoryDict objectForKey:attribute_id];
-        if (self.myToeflGamePadMode == toeflGameTestMode && category.progress == hasNotReviewed)
+        if (category.progress == hasNotReviewed)
         {
             continue;
         }
@@ -130,25 +128,13 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         [button setTitle:[NSString stringWithFormat:@"%@", category.categoryName] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        if ((self.myToeflGamePadMode == toeflGameReviewMode && category.progress >= hasReviewed) || self.myToeflGamePadMode == toeflGameTestMode)
-        {
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-        }
+        
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        /*
-        CALayer * btnLayer = [button layer];
-        [btnLayer setBorderWidth:0.5f];
-        [btnLayer setBorderColor:[[UIColor yellowColor] CGColor]];
-        */
         
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
         [button addSubview:progress];
-
         
         NSInteger attributeInt = [attribute_id integerValue];
         button.tag = 2000 + attributeInt;
@@ -163,9 +149,10 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             row = 0;
             column ++;
         }
+
     }
     int numPages;
-    if (self.myToeflGamePadMode == toeflGameReviewMode)
+    if (self.myToeflMode == toeflReviewMode)
     {
         numPages = ceilf(categoryNumber / 18.0f);
     }
@@ -178,29 +165,84 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
+
+}
+
+- (void)tileCategoryButton4ReviewMode
+{
+    int index = 0;
+    int row = 0;
+    int column = 0;
+    NSArray * attributeids = [dicthelper.categoryDict allKeys];
     
+    for (NSNumber *attribute_id in attributeids)
+    {
+        Category * category = [dicthelper.categoryDict objectForKey:attribute_id];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(column*itemWidth + marginHorz, row*itemHeight + marginVert, buttonWidth, buttonHeight);
+        [button setTitle:[NSString stringWithFormat:@"%@", category.categoryName] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        if (category.progress >= hasReviewed)
+        {
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+        }
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+     
+        UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+        progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
+        [button addSubview:progress];
+        
+        NSInteger attributeInt = [attribute_id integerValue];
+        button.tag = 2000 + attributeInt;
+        
+        [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.scrollView addSubview:button];
+        
+        index ++;
+        row++;
+        if (row == 3)
+        {
+            row = 0;
+            column ++;
+        }
+
+    }
+    int numPages;
+    if (self.myToeflMode == toeflReviewMode)
+    {
+        numPages = ceilf(categoryNumber / 18.0f);
+    }
+    else
+    {
+        numPages = ceilf(hasReviewedNumber / 18.0f);
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
+    
+    self.pageControl.numberOfPages = numPages;
+    self.pageControl.currentPage = 0;
 }
 
 - (void)buttonPressed:(UIButton *)sender
 {
     int categoryid = sender.tag-2000;
     NSNumber *aWrappedId = [NSNumber numberWithInteger:categoryid];
-    if ( self.myToeflGamePadMode == toeflGameTestMode)
+    if ( self.myToeflMode == toeflTestMode)
     {
-        //if (gamePadViewController == nil)
-        //{
         GamePadViewController * gamePadViewController = [[GamePadViewController alloc]initWithNibName:@"GamePadViewController" bundle:nil];
-        //}
         gamePadViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         gamePadViewController.wordGroup = aWrappedId;
         [self presentViewController:gamePadViewController animated:YES completion:nil];
     }
-    else if (self.myToeflGamePadMode == toeflGameReviewMode)
+    else if (self.myToeflMode == toeflReviewMode)
     {
-        //if (wordListViewController == nil)
-        //{
         WordListViewController * wordListViewController = [[WordListViewController alloc]initWithNibName:@"WordListViewController" bundle:nil];
-        //}
         wordListViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         wordListViewController.wordGroup = aWrappedId;
         [self presentViewController:wordListViewController animated:YES completion:nil];

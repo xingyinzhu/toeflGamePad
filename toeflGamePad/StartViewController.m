@@ -10,6 +10,7 @@
 #import "WordListViewController.h"
 #import "DictHelper.h"
 #import "CategoryViewController.h"
+#import "AboutViewController.h"
 
 @interface StartViewController ()
 
@@ -19,7 +20,7 @@
 {
     //WordListViewController *wordListViewController;
     CategoryViewController *categoryViewController;
-
+    AboutViewController *aboutViewController;
 }
 
 @synthesize reviewButton = _reviewButton;
@@ -34,11 +35,20 @@
     categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];
     //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    categoryViewController.myToeflGamePadMode = toeflGameTestMode;
+    categoryViewController.myToeflMode = toeflTestMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];
 
 }
 
+- (IBAction)howTo
+{
+    if (aboutViewController == nil)
+    {
+        aboutViewController = [[AboutViewController alloc]initWithNibName:@"AboutViewController" bundle:nil];
+        aboutViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:aboutViewController animated:YES completion:nil];
+    }
+}
 
 - (IBAction)newReview
 {
@@ -56,7 +66,7 @@
     categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];        
     //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    categoryViewController.myToeflGamePadMode = toeflGameReviewMode;
+    categoryViewController.myToeflMode = toeflReviewMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];
 
     
