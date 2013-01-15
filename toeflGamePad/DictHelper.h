@@ -12,8 +12,9 @@
 
 @property (nonatomic, readonly, strong) NSMutableArray * dictArray;
 @property (nonatomic, readonly, strong) NSMutableArray * categoryName;
-@property (nonatomic, readonly, strong) NSMutableDictionary * categoryDict;
+//@property (nonatomic, readonly, strong) NSMutableDictionary * categoryDict;
 
++(NSMutableDictionary *)instanceCategoryDict;
 + (void)StartInitDict;
 + (void)LoadDict;
 + (BOOL)DictIsExist : (NSFileManager *)filemanager;
@@ -33,5 +34,5 @@
 - (NSMutableArray *)getWordsByGroup: (NSInteger)group;
 - (NSMutableArray *)getRandomWords;
 
-- (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray;
+- (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid;
 @end

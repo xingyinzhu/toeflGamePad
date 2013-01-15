@@ -11,12 +11,16 @@
 @interface Category : NSObject
 
 @property (nonatomic, copy)NSString * categoryName;
-@property (nonatomic, assign)NSInteger progress;
+@property (nonatomic, assign)float progress;
 
 typedef enum
 {
     hasNotReviewed = -1,
     hasReviewed = 0
 }CategoryDisplayMode;
+
+- (NSComparisonResult) compareProgress: (Category *)other;
+
+- (void)updateMemCategoryProgressbyWordProgress : (int)totalCurrentProgress withLength : (int)length;
 
 @end

@@ -29,6 +29,20 @@
     return [self.word localizedStandardCompare:other.word];
 }
 
+- (NSComparisonResult) compareProgress: (Word *)other
+{
+    if (self.progress > other.progress)
+    {
+        return (NSComparisonResult)NSOrderedDescending;
+    }
+    else if (self.progress < other.progress)
+    {
+        return (NSComparisonResult)NSOrderedAscending;
+    }
+    else
+        return (NSComparisonResult)NSOrderedSame;
+}
+
 - (NSString *)configureForMark
 {
     NSString * temp = [NSString stringWithFormat:@"%s%@", "[", self.englishmark];

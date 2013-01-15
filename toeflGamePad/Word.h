@@ -22,6 +22,8 @@
 
 - (NSComparisonResult) compareName: (Word *)other;
 
+- (NSComparisonResult) compareProgress: (Word *)other;
+
 - (NSString *)configureForMark;
 
 - (NSString *)showInitPartWord;

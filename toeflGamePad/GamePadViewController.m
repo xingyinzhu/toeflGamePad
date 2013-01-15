@@ -111,6 +111,7 @@
             NSLog(@"%@",hintWord);
             currentWord = hintWord;
             self.word.text = currentWord;
+            [self lowerScore4CurrentWord:2];
         }
     }
     
@@ -212,15 +213,20 @@
     BOOL isfinish = [[isFinished objectAtIndex:currentWordIndex]boolValue];
     if (isfinish == NO)
     {
-        NSLog(@"before : %@",score[currentWordIndex]);
-        int tmpscore = [score[currentWordIndex] integerValue];
-        if (tmpscore != 0)
-        {
-            tmpscore /= 2;
-            score[currentWordIndex] = [NSNumber numberWithInteger: tmpscore];
-        }
-        NSLog(@"after : %@",score[currentWordIndex]);
+        [self lowerScore4CurrentWord:4];
     }
+}
+
+- (void)lowerScore4CurrentWord: (NSInteger)ration
+{
+    NSLog(@"before : %@",score[currentWordIndex]);
+    int tmpscore = [score[currentWordIndex] integerValue];
+    if (tmpscore != 0)
+    {
+        tmpscore /= ration;
+        score[currentWordIndex] = [NSNumber numberWithInteger: tmpscore];
+    }
+    NSLog(@"after : %@",score[currentWordIndex]);
 }
 
 - (IBAction)backToCategoryView
@@ -252,7 +258,7 @@
     if (alertView.tag == 1)//finish all
     {
         NSLog(@"before update");
-        [dicthelper updateProgress:score withWordArray:testWords];
+        [dicthelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
         NSLog(@"after update");
         [self exitGamePad];
     }
@@ -265,7 +271,7 @@
         else
         {
             [self updateScore];
-            [dicthelper updateProgress:score withWordArray:testWords];
+            [dicthelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
             [self exitGamePad];
         }
     }

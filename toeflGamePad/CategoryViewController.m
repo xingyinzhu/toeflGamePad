@@ -50,11 +50,47 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     }
     return self;
 }
+- (void)updateCategoryProgressinView
+{
+    NSArray * attributeids = [[DictHelper instanceCategoryDict] allKeys];
+    for (NSNumber *attribute_id in attributeids)
+    {
+        NSInteger id = 2000 + [attribute_id integerValue];
+        
+        UIView * btn = [self.scrollView viewWithTag:id];
+        if (btn == nil)
+        {
+            continue;
+        }
+        else
+        {
+            Category * category = [[DictHelper instanceCategoryDict]objectForKey:attribute_id];
+            //[1] is UIProgressView
+            UIProgressView * progress  = (UIProgressView *)[btn subviews][1];
+            if (category.progress > 0.01)
+            {
+                NSLog(@"%@",category.categoryName);
+                NSLog(@"%f",category.progress);
+            }
+            progress.progress = category.progress;
+        }
+    }
+    
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"in categoryViewController viewWillAppear");
+    [self updateCategoryProgressinView];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    NSLog(@"in categoryViewController viewDidLoad");
     self.scrollView.contentSize = CGSizeMake(1000, self.scrollView.bounds.size.height);
     
     if (dicthelper == nil)
@@ -70,7 +106,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             
         }
     }
-    categoryNumber = [dicthelper.categoryDict count];
+    categoryNumber = [[DictHelper instanceCategoryDict] count];
     if (self.myToeflMode == toeflTestMode)
     {
         [self tileCategoryButton4TestMode];
@@ -112,12 +148,12 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     int index = 0;
     int row = 1;
     int column = 0;
-    NSArray * attributeids = [dicthelper.categoryDict allKeys];
+    NSArray * attributeids = [[DictHelper instanceCategoryDict] allKeys];
     [self addRandomButton];
     
     for (NSNumber *attribute_id in attributeids)
     {
-        Category * category = [dicthelper.categoryDict objectForKey:attribute_id];
+        Category * category = [[DictHelper instanceCategoryDict] objectForKey:attribute_id];
         if (category.progress == hasNotReviewed)
         {
             continue;
@@ -134,7 +170,10 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
+        progress.progress = category.progress;
+        //progress.
         [button addSubview:progress];
+        
         
         NSInteger attributeInt = [attribute_id integerValue];
         button.tag = 2000 + attributeInt;
@@ -173,11 +212,11 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     int index = 0;
     int row = 0;
     int column = 0;
-    NSArray * attributeids = [dicthelper.categoryDict allKeys];
+    NSArray * attributeids = [[DictHelper instanceCategoryDict] allKeys];
     
     for (NSNumber *attribute_id in attributeids)
     {
-        Category * category = [dicthelper.categoryDict objectForKey:attribute_id];
+        Category * category = [[DictHelper instanceCategoryDict] objectForKey:attribute_id];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(column*itemWidth + marginHorz, row*itemHeight + marginVert, buttonWidth, buttonHeight);
         [button setTitle:[NSString stringWithFormat:@"%@", category.categoryName] forState:UIControlStateNormal];
@@ -196,6 +235,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
      
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
+        progress.progress = category.progress;
         [button addSubview:progress];
         
         NSInteger attributeInt = [attribute_id integerValue];
