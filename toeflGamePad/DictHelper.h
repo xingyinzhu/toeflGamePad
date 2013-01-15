@@ -12,7 +12,6 @@
 
 @property (nonatomic, readonly, strong) NSMutableArray * dictArray;
 @property (nonatomic, readonly, strong) NSMutableArray * categoryName;
-//@property (nonatomic, readonly, strong) NSMutableDictionary * categoryDict;
 
 +(NSMutableDictionary *)instanceCategoryDict;
 + (void)StartInitDict;
@@ -23,16 +22,17 @@
 
 + (void) loadAllWordObejctIntoDict;
 
-- (NSInteger)fetchAllCategory;
++ (NSInteger)fetchAllCategory;
 
-- (void)updateHasReviewed: (NSInteger)type;
++ (void)updateHasReviewed: (NSInteger)type;
 - (void)getWordsByType: (NSInteger)type;
 
 - (void)getWordsByPartOfWords: (NSString *)partOfWord;
 
 - (void)getWordsByGroupEx: (NSInteger)group;
-- (NSMutableArray *)getWordsByGroup: (NSInteger)group;
-- (NSMutableArray *)getRandomWords;
++ (NSMutableArray *)getWordsByGroup: (NSInteger)group;
++ (NSMutableArray *)getRandomWords;
 
-- (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid;
++ (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid;
+
 @end

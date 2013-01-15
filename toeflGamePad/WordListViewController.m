@@ -21,14 +21,13 @@ static NSString * const WordCellIdentifier = @"WordCell";
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControl;
 
-- (IBAction)segmentChanged:(UISegmentedControl *)sender;
+//- (IBAction)segmentChanged:(UISegmentedControl *)sender;
 
 @end
 
 @implementation WordListViewController
 {
     DictHelper *dicthelper;
-    //NSMutableArray *wordList;
     NSInteger wordGroupInt;
     //prevent a memory leak
     __weak DetailViewController *detailViewController;
@@ -39,14 +38,6 @@ static NSString * const WordCellIdentifier = @"WordCell";
 @synthesize segmentedControl = _segmentedControl;
 @synthesize wordGroup = _wordGroup;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 - (void)customizeFont
 {
     UIFont *font = [UIFont fontWithName:@"Knewave" size:12.0f];
@@ -71,7 +62,6 @@ static NSString * const WordCellIdentifier = @"WordCell";
     wordGroupInt  = [self.wordGroup integerValue];
     NSLog(@"wordGroupInt : %d",wordGroupInt);
     [dicthelper getWordsByGroupEx:wordGroupInt];
-    //[dicthelper getWordsByType:0];
     NSLog(@"in word list : %d",[dicthelper.dictArray count]);
     
     [self customizeFont];
@@ -166,7 +156,6 @@ static NSString * const WordCellIdentifier = @"WordCell";
     Word *word = dicthelper.dictArray[indexPath.row];
     [cell configureForWord:word.word];
     [cell configureForProgress:word.progress];
-    
     return cell;
 }
 

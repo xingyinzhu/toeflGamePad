@@ -42,14 +42,6 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 @synthesize pageControl = _pageControll;
 @synthesize myToeflMode = _myToeflGamePadMode;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 - (void)updateCategoryProgressinView
 {
     NSArray * attributeids = [[DictHelper instanceCategoryDict] allKeys];
@@ -82,7 +74,6 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"in categoryViewController viewWillAppear");
     [self updateCategoryProgressinView];
 }
 
@@ -90,7 +81,6 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 {
     [super viewDidLoad];
     
-    NSLog(@"in categoryViewController viewDidLoad");
     self.scrollView.contentSize = CGSizeMake(1000, self.scrollView.bounds.size.height);
     
     if (dicthelper == nil)
@@ -98,7 +88,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         dicthelper = [[DictHelper alloc]init];
     }
     
-    hasReviewedNumber = [dicthelper fetchAllCategory];
+    hasReviewedNumber = [DictHelper fetchAllCategory];
     if (self.myToeflMode == toeflTestMode)
     {
         if (hasReviewedNumber == 0)
@@ -159,6 +149,9 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             continue;
         }
         
+        NSLog(@"category.categoryName : %@",category.categoryName);
+        NSLog(@"category.categoryName : %f",category.progress);
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(column*itemWidth + marginHorz, row*itemHeight + marginVert, buttonWidth, buttonHeight);
         [button setTitle:[NSString stringWithFormat:@"%@", category.categoryName] forState:UIControlStateNormal];
@@ -171,7 +164,6 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
         progress.progress = category.progress;
-        //progress.
         [button addSubview:progress];
         
         
@@ -287,7 +279,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         wordListViewController.wordGroup = aWrappedId;
         [self presentViewController:wordListViewController animated:YES completion:nil];
         
-        [dicthelper updateHasReviewed:categoryid];
+        [DictHelper updateHasReviewed:categoryid];
         [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }

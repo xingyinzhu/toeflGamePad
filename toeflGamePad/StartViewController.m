@@ -18,7 +18,6 @@
 
 @implementation StartViewController
 {
-    //WordListViewController *wordListViewController;
     CategoryViewController *categoryViewController;
     AboutViewController *aboutViewController;
 }
@@ -30,14 +29,10 @@
 
 - (IBAction)newTest
 {
-    //if (categoryViewController == nil)
-    //{
     categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];
-    //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     categoryViewController.myToeflMode = toeflTestMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];
-
 }
 
 - (IBAction)howTo
@@ -52,24 +47,10 @@
 
 - (IBAction)newReview
 {
-    /*
-    if (wordListViewController == nil)
-    {
-        wordListViewController = [[WordListViewController alloc]initWithNibName:@"WordListViewController" bundle:nil];
-        
-        wordListViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:wordListViewController animated:YES completion:nil];
-    }
-     */
-    //if (categoryViewController == nil)
-    //{
-    categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];        
-    //}
+    categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     categoryViewController.myToeflMode = toeflReviewMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];
-
-    
 }
 
 - (void)viewDidLoad
@@ -84,13 +65,7 @@
     [[self.reviewButton titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
     [[self.testButton titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
     [[self.howtoButton titleLabel] setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
-    
-    /*
-    for (NSString *fontName in [UIFont familyNames])
-    {
-        NSLog(@"%@", fontName);
-    }
-     */
+
 }
 
 - (void)didReceiveMemoryWarning

@@ -51,11 +51,11 @@
     NSLog(@"wordGroupInt : %d",wordGroupInt);
     if (wordGroupInt == -1)
     {
-        testWords = [dicthelper getRandomWords];
+        testWords = [DictHelper getRandomWords];
     }
     else
     {
-        testWords = [dicthelper getWordsByGroup:wordGroupInt];
+        testWords = [DictHelper getWordsByGroup:wordGroupInt];
     }
     [testWords shuffle];
     
@@ -103,8 +103,13 @@
         NSString * hintWord = [tmp giveOneHint:currentWord];
         if ([hintWord isEqualToString:currentWord])
         {
-            NSLog(@"in equal!");
-#pragma todo
+            UIAlertView * noHintAlertView = [[UIAlertView alloc]
+                                                initWithTitle:@"Alert!"
+                                                message:@"No More Hint!"
+                                                delegate:self
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:@"Ok", nil];
+            [noHintAlertView show];
         }
         else
         {
@@ -215,6 +220,7 @@
     {
         [self lowerScore4CurrentWord:4];
     }
+    [self showNextWord];
 }
 
 - (void)lowerScore4CurrentWord: (NSInteger)ration
@@ -258,7 +264,7 @@
     if (alertView.tag == 1)//finish all
     {
         NSLog(@"before update");
-        [dicthelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
+        [DictHelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
         NSLog(@"after update");
         [self exitGamePad];
     }
@@ -271,7 +277,7 @@
         else
         {
             [self updateScore];
-            [dicthelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
+            [DictHelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
             [self exitGamePad];
         }
     }

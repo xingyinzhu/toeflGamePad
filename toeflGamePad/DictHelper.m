@@ -15,10 +15,7 @@
 
 @interface DictHelper()
 
-//@property (nonatomic, retain) NSString * dictPath;
 @property (nonatomic, readwrite, strong) NSMutableArray * dictArray;
-//@property (nonatomic, readwrite, strong) NSMutableDictionary * categoryDict;
-
 
 @end
 
@@ -30,10 +27,6 @@ static NSMutableDictionary *categoryDict;
 @implementation DictHelper
 
 @synthesize dictArray = _dictArray;
-//@synthesize categoryDict = _categoryDict;
-//@synthesize dictDataBase = _dictDataBase;
-//@synthesize dictPath = _dictPath;
-
 
 +(NSMutableDictionary *)instanceCategoryDict
 {
@@ -108,7 +101,7 @@ static NSMutableDictionary *categoryDict;
     }
 }
 
-- (NSInteger)fetchAllCategory
++ (NSInteger)fetchAllCategory
 {
 
     NSLog(@"in fetchAllCategory");
@@ -119,7 +112,7 @@ static NSMutableDictionary *categoryDict;
     {
         categoryDict = [[NSMutableDictionary alloc]init];
         
-        NSUInteger count = [dictDataBase intForQuery:@"select count(*) from attribute_id"];
+        //NSUInteger count = [dictDataBase intForQuery:@"select count(*) from attribute_id"];
         
         NSString * sql = @"select * from attribute_id";
         FMResultSet *result = [dictDataBase executeQuery:sql];
@@ -131,18 +124,16 @@ static NSMutableDictionary *categoryDict;
             
             NSString * attribute_name = [result stringForColumn:@"attributename"];
             NSInteger progress = [result intForColumn:@"progress"];
-            //NSNumber *aWrappedProgress = [NSNumber numberWithInteger:progress];
             if (progress != hasNotReviewed)
             {
                 hasReviewedNumber ++;
             }
             
             Category * category = [[Category alloc]init];
-            [category updateMemCategoryProgressbyWordProgress:progress withLength:count];
+            //[category updateMemCategoryProgressbyWordProgress:progress withLength:count];
             category.categoryName = attribute_name;
             
             [categoryDict setObject:category forKey:aWrappedId];
-            //NSLog(@"%d : %@",attribute_id,attribute_name);
         }
     }
     
@@ -151,7 +142,7 @@ static NSMutableDictionary *categoryDict;
 }
 
 //invoke after function : updateProgress
-- (void)updateCategoryProgress: (NSInteger)categoryid withCategoryProgress : (NSInteger)progress
++ (void)updateCategoryProgress: (NSInteger)categoryid withCategoryProgress : (NSInteger)progress
 {
     BOOL success;
     NSString * updateSql;
@@ -172,7 +163,7 @@ static NSMutableDictionary *categoryDict;
 }
 
 
-- (void)updateHasReviewed: (NSInteger)type
++ (void)updateHasReviewed: (NSInteger)type
 {
     
     NSString * selectSql;
@@ -250,7 +241,7 @@ static NSMutableDictionary *categoryDict;
     {
         [self.dictArray removeAllObjects];
     }
-    //int cnt = 0;
+
     while ([result next])
     {
         NSString * word = [result stringForColumn:@"word"];
@@ -261,9 +252,7 @@ static NSMutableDictionary *categoryDict;
             NSLog(@"%@",word);
         }
         [self.dictArray addObject:tmpWord];
-        //cnt ++;
     }
-    //NSLog(@"%d",cnt);
     [self.dictArray sortUsingSelector:@selector(compareName:)];
 }
 
@@ -323,14 +312,12 @@ static NSMutableDictionary *categoryDict;
         [self.dictArray addObject:tmpWord];
     }
     //[self.dictArray sortUsingSelector:@selector(compareName:)];
-    
     [self.dictArray sortUsingSelector:@selector(compareProgress:)];
 }
 
 
 //for GamePadViewController
-
-- (BOOL)wordIsFinished: (NSString *)word
++ (BOOL)wordIsFinished: (NSString *)word
 {
     //Word * tmpWord = [allDict objectForKey:word];
     NSString * selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", word];
@@ -355,7 +342,7 @@ static NSMutableDictionary *categoryDict;
     }
 }
 
-- (NSMutableArray *)getWordsByGroup: (NSInteger)group
++ (NSMutableArray *)getWordsByGroup: (NSInteger)group
 {
     NSMutableArray * groupWord = [[NSMutableArray alloc]init];
     
@@ -380,7 +367,7 @@ static NSMutableDictionary *categoryDict;
     return groupWord;
 }
 
-- (NSMutableArray *)getRandomWords
++ (NSMutableArray *)getRandomWords
 {
     int totalRandomNumber = 20;
     NSMutableArray * randomWords = [[NSMutableArray alloc]initWithCapacity:totalRandomNumber];
@@ -417,7 +404,7 @@ static NSMutableDictionary *categoryDict;
     }
 }
 
-- (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid
++ (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid
 {
     int length = [wordArray count];
     NSString * updateSql;
@@ -446,7 +433,6 @@ static NSMutableDictionary *categoryDict;
         Word * tmpWord = [allDict objectForKey:tmp.word];
         tmpWord.progress = tmp.progress;
         
-        //tmpWord = [allDict objectForKey:tmp.word];
         NSLog(@"update mem progress : %d",tmpWord.progress);
         
         totalCurrentProgress += tmp.progress;
@@ -462,14 +448,21 @@ static NSMutableDictionary *categoryDict;
     }
     
     //update category progress
-    //NSNumber *aWrappedId = [NSNumber numberWithInteger:attribute_id];
     NSNumber *categoryId = [NSNumber numberWithInteger:categoryid];
     NSLog(@"categoryid : %@",categoryId);
-    Category *category = [categoryDict objectForKey:categoryId];
+    if (categoryid != -1)
+    {
+        Category *category = [categoryDict objectForKey:categoryId];
     
-    NSLog(@"category.categoryName : %@",category.categoryName);
-    [category updateMemCategoryProgressbyWordProgress:totalCurrentProgress withLength:length];
-    [self updateCategoryProgress:categoryid withCategoryProgress:totalCurrentProgress];
+        NSLog(@"category.categoryName : %@",category.categoryName);
+        [category updateMemCategoryProgressbyWordProgress:totalCurrentProgress withLength:length];
+        [self updateCategoryProgress:categoryid withCategoryProgress:totalCurrentProgress];
+    }
+    else //random wordlist
+    {
+#pragma mark todo
+        
+    }
 }
 
 @end
