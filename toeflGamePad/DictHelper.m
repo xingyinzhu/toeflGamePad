@@ -68,18 +68,23 @@ static NSMutableDictionary *categoryDict;
         {
             dictDataBase = [FMDatabase databaseWithPath:dictPath];
         }
-        if (![dictDataBase open])
-        {
-            NSLog(@"Open dict failed!");
-            return;
-        }
-        
     }
-    
+}
+
++ (void)OpenDict
+{
+    if (![dictDataBase open])
+    {
+        NSLog(@"Open dict failed!");
+        return;
+    }
 }
 
 + (void)loadAllWordObejctIntoDict
 {
+    
+    [self OpenDict];
+    
     if (allDict == nil)
     {
         allDict = [[NSMutableDictionary alloc]init];
@@ -101,20 +106,19 @@ static NSMutableDictionary *categoryDict;
         }
         NSLog(@"all word number : %d",cnt);
     }
+    
+    [dictDataBase close];
 }
 
 + (NSInteger)fetchAllCategory
 {
-
-    NSLog(@"in fetchAllCategory");
+    [self OpenDict];
     
-    NSInteger hasReviewedNumber = 0;
+    NSLog(@"in fetchAllCategory");
     
     if (categoryDict == nil)
     {
         categoryDict = [[NSMutableDictionary alloc]init];
-        
-        //NSUInteger count = [dictDataBase intForQuery:@"select count(*) from attribute_id"];
         
         NSString * sql = @"select * from attribute_id";
         FMResultSet *result = [dictDataBase executeQuery:sql];
@@ -129,19 +133,7 @@ static NSMutableDictionary *categoryDict;
             
             NSString * attribute_name = [result stringForColumn:@"attributename"];
             NSInteger progress = [result intForColumn:@"progress"];
-            /*
-            if (attribute_id == 4)
-            {
-                NSLog(@"%@",selectSql);
-                NSLog(@"progress in fetchAllCategory progress: %d",progress);
-                NSLog(@"count in fetchAllCategory count: %d",count);
-            }
-            */
-            if (progress == hasReviewed)
-            {
-                hasReviewedNumber ++;
-            }
-            
+          
             Category * category = [[Category alloc]init];
             [category updateMemCategoryProgressbyWordProgress:progress withLength:count];
             category.categoryName = attribute_name;
@@ -149,13 +141,15 @@ static NSMutableDictionary *categoryDict;
         }
     }
     
-    NSLog(@"self.categoryDict count : %d",[categoryDict count]);
+    NSUInteger hasReviewedNumber = [dictDataBase intForQuery:@"select count(*) from attribute_id where progress = 0"];
+    [dictDataBase close];
     return hasReviewedNumber;
 }
 
 //invoke after function : updateProgress
 + (void)updateCategoryProgress: (NSInteger)categoryid withCategoryProgress : (NSInteger)progress
 {
+    [self OpenDict];
     BOOL success;
     NSString * updateSql;
     updateSql = [NSString stringWithFormat:@"update attribute_id set progress = %d where attributeid = %d",progress,categoryid];
@@ -165,18 +159,19 @@ static NSMutableDictionary *categoryDict;
 
     if (success)
     {
-        //[dictDataBase commit];
+        NSLog(@"updateCategoryProgress categoryid : %d successfully",categoryid);
     }
     else
     {
         NSLog(@"FAIL");
     }
-
+    [dictDataBase close];
 }
 
 
 + (void)updateHasReviewed: (NSInteger)type
 {
+    [self OpenDict];
     
     NSString * selectSql;
     NSString * updateSql;
@@ -201,35 +196,40 @@ static NSMutableDictionary *categoryDict;
         NSLog(@"%@",updateSql);
         if (success)
         {
-            //[dictDataBase commit];
+            NSLog(@"updateHasReviewed %d successfully!",type);
         }
         else
         {
             NSLog(@"FAIL");
         }
     }
+    [dictDataBase close];
 }
 
-+ (BOOL)DictIsExist:(NSFileManager *)filemanager;
-
++ (BOOL)DictIsExist:(NSFileManager *)filemanager
 {
     return [filemanager fileExistsAtPath:dictPath];
 }
 
 + (NSString *)getFirstWord
 {
+    [self OpenDict];
+    
     NSString * sql = @"select * from words";
     FMResultSet *result = [dictDataBase executeQuery:sql];
     while ([result next])
     {
         NSString *a = [result stringForColumn:@"englishmark"];
+        [dictDataBase close];
         return a;
     }
+    [dictDataBase close];
     return nil;
 }
 
 - (void)getWordsByType: (NSInteger)type
 {
+    [DictHelper OpenDict];
     NSString * sql = @"select word from attribute";
     NSString * where;
     if (type == 0)
@@ -266,6 +266,7 @@ static NSMutableDictionary *categoryDict;
         [self.dictArray addObject:tmpWord];
     }
     [self.dictArray sortUsingSelector:@selector(compareName:)];
+    [dictDataBase close];
 }
 
 - (void)getWordsByPartOfWords: (NSString *)partOfWord
@@ -299,6 +300,7 @@ static NSMutableDictionary *categoryDict;
 //for WordListViewController
 - (void)getWordsByGroupEx: (NSInteger)group
 {
+    [DictHelper OpenDict];
     NSString * selectSql = [NSString stringWithFormat:@"select w.word from words w, attribute a where a.word = w.word and a.groups = %d", group];
     FMResultSet *result = [dictDataBase executeQuery:selectSql];
     
@@ -326,12 +328,15 @@ static NSMutableDictionary *categoryDict;
     //[self.dictArray sortUsingSelector:@selector(compareName:)];
     [self.dictArray sortUsingSelector:@selector(compareProgress:)];
     self.backupDictArray = [self.dictArray mutableCopy];
+    
+    [dictDataBase close];
 }
 
 
 //for GamePadViewController
 + (BOOL)wordIsFinished: (NSString *)word
 {
+    [self OpenDict];
     //Word * tmpWord = [allDict objectForKey:word];
     NSString * selectSql = [NSString stringWithFormat:@"select value, goal from progress where word = '%@'", word];
     FMResultSet * progressResult = [dictDataBase executeQuery:selectSql];
@@ -345,6 +350,7 @@ static NSMutableDictionary *categoryDict;
         break;
     }
     
+    [dictDataBase close];
     if (value >= goal)
     {
         return YES;
@@ -357,6 +363,7 @@ static NSMutableDictionary *categoryDict;
 
 + (NSMutableArray *)getWordsByGroup: (NSInteger)group
 {
+    [self OpenDict];
     NSMutableArray * groupWord = [[NSMutableArray alloc]init];
     
     NSString * selectSql = [NSString stringWithFormat:@"select w.word from words w, attribute a where a.word = w.word and a.groups = %d", group];
@@ -377,11 +384,14 @@ static NSMutableDictionary *categoryDict;
             [groupWord addObject:tmpWord];
         }
     }
+    [dictDataBase close];
+    
     return groupWord;
 }
 
 + (NSMutableArray *)getRandomWords
 {
+    [self OpenDict];
     int totalRandomNumber = 20;
     NSMutableArray * randomWords = [[NSMutableArray alloc]initWithCapacity:totalRandomNumber];
     NSMutableArray *  candidate = [[NSMutableArray alloc]init];
@@ -402,6 +412,8 @@ static NSMutableDictionary *categoryDict;
         }
     }
     
+    [dictDataBase close];
+    
     if ([candidate count] <= totalRandomNumber)
     {
         return candidate;
@@ -419,6 +431,8 @@ static NSMutableDictionary *categoryDict;
 
 + (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid
 {
+    [self OpenDict];
+    
     int length = [wordArray count];
     NSString * updateSql;
     NSString * selectSql;
@@ -476,6 +490,7 @@ static NSMutableDictionary *categoryDict;
     {
 #pragma mark todo
     }
+    [dictDataBase close];
 }
 
 @end

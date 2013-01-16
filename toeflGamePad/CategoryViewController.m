@@ -50,7 +50,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         NSInteger id = 2000 + [attribute_id integerValue];
         
         UIView * btn = [self.scrollView viewWithTag:id];
-        if (btn == nil)
+        if (btn == nil || btn.tag == 1999)
         {
             continue;
         }
@@ -93,7 +93,14 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     {
         if (hasReviewedNumber == 0)
         {
-#pragma mark todo alertview
+            UIAlertView * noTestCategoryAlertView = [[UIAlertView alloc]
+                                                     initWithTitle:@"No Test Items"
+                                                     message:@"You should review items in review mode!"
+                                                     delegate:self
+                                                     cancelButtonTitle:nil
+                                                     otherButtonTitles:@"Ok", nil];
+            [noTestCategoryAlertView setTag:1];
+            [noTestCategoryAlertView show];
         }
     }
     categoryNumber = [[DictHelper instanceCategoryDict] count];
@@ -107,23 +114,26 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1)//finish all
+    {
+        [self backtoStartView];
+    }
+}
+
 - (void)addRandomButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0*itemWidth + marginHorz, 0*itemHeight + marginVert, buttonWidth, buttonHeight);
-    [button setTitle:[NSString stringWithFormat:@"随机"] forState:UIControlStateNormal];
+    [button setTitle:[NSString stringWithFormat:@"随便玩玩"] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
     button.tag = 1999;
     [button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
-    UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-    progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
-    [button addSubview:progress];
-    
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:button];
-    
 }
 
 /*
@@ -181,23 +191,12 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             row = 0;
             column ++;
         }
-
-    }
-    int numPages;
-    if (self.myToeflMode == toeflReviewMode)
-    {
-        numPages = ceilf(categoryNumber / 18.0f);
-    }
-    else
-    {
-        numPages = ceilf(hasReviewedNumber / 18.0f);
     }
     
+    int numPages = ceilf(hasReviewedNumber / 18.0f);
     self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
-    
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
-
 }
 
 - (void)tileCategoryButton4ReviewMode
@@ -247,18 +246,9 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         }
 
     }
-    int numPages;
-    if (self.myToeflMode == toeflReviewMode)
-    {
-        numPages = ceilf(categoryNumber / 18.0f);
-    }
-    else
-    {
-        numPages = ceilf(hasReviewedNumber / 18.0f);
-    }
     
+    int numPages = ceilf(categoryNumber / 18.0f);
     self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
-    
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
 }
