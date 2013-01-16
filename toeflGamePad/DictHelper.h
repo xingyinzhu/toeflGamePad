@@ -11,7 +11,9 @@
 @interface DictHelper : NSObject
 
 @property (nonatomic, readonly, strong) NSMutableArray * dictArray;
-@property (nonatomic, readonly, strong) NSMutableArray * categoryName;
+@property (nonatomic, readonly, strong) NSMutableArray * backupDictArray;
+
+//@property (nonatomic, readonly, strong) NSMutableArray * categoryName;
 
 +(NSMutableDictionary *)instanceCategoryDict;
 + (void)StartInitDict;

@@ -57,6 +57,7 @@
     {
         testWords = [DictHelper getWordsByGroup:wordGroupInt];
     }
+
     [testWords shuffle];
     
     currentWordIndex = 0;
@@ -136,14 +137,28 @@
 
 - (void)prepareForGamePad
 {
-    Word * tmp = [testWords objectAtIndex:currentWordIndex];
-    currentWord = [tmp showInitPartWord];
-    self.word.text = currentWord;
-    //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
-    [self.word setTextColor:[UIColor whiteColor]];
-    self.mark.text = @"";
-    self.meangings.text = tmp.meanings;
+    if ([testWords count] == 0)
+    {
+        UIAlertView * finfishedAlertView = [[UIAlertView alloc]
+                                            initWithTitle:@"Finished"
+                                            message:@"Congratulations!"
+                                            delegate:self
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:@"Ok", nil];
+        [finfishedAlertView setTag:1];
+        [finfishedAlertView show];
 
+    }
+    else
+    {
+        Word * tmp = [testWords objectAtIndex:currentWordIndex];
+        currentWord = [tmp showInitPartWord];
+        self.word.text = currentWord;
+        //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
+        [self.word setTextColor:[UIColor whiteColor]];
+        self.mark.text = @"";
+        self.meangings.text = tmp.meanings;
+    }
 }
 
 -(void)findPreviousUnfinishedWordIndex

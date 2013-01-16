@@ -16,6 +16,7 @@
 @interface DictHelper()
 
 @property (nonatomic, readwrite, strong) NSMutableArray * dictArray;
+@property (nonatomic, readwrite, strong) NSMutableArray * backupDictArray;
 
 @end
 
@@ -27,6 +28,7 @@ static NSMutableDictionary *categoryDict;
 @implementation DictHelper
 
 @synthesize dictArray = _dictArray;
+@synthesize backupDictArray = _backupDictArray;
 
 +(NSMutableDictionary *)instanceCategoryDict
 {
@@ -122,17 +124,27 @@ static NSMutableDictionary *categoryDict;
             NSInteger attribute_id = [result intForColumn:@"attributeid"];
             NSNumber *aWrappedId = [NSNumber numberWithInteger:attribute_id];
             
+            NSString * selectSql = [NSString stringWithFormat:@"select count(*) from attribute where groups = %d",attribute_id];
+            NSUInteger count = [dictDataBase intForQuery:selectSql];
+            
             NSString * attribute_name = [result stringForColumn:@"attributename"];
             NSInteger progress = [result intForColumn:@"progress"];
-            if (progress != hasNotReviewed)
+            /*
+            if (attribute_id == 4)
+            {
+                NSLog(@"%@",selectSql);
+                NSLog(@"progress in fetchAllCategory progress: %d",progress);
+                NSLog(@"count in fetchAllCategory count: %d",count);
+            }
+            */
+            if (progress == hasReviewed)
             {
                 hasReviewedNumber ++;
             }
             
             Category * category = [[Category alloc]init];
-            //[category updateMemCategoryProgressbyWordProgress:progress withLength:count];
+            [category updateMemCategoryProgressbyWordProgress:progress withLength:count];
             category.categoryName = attribute_name;
-            
             [categoryDict setObject:category forKey:aWrappedId];
         }
     }
@@ -258,8 +270,12 @@ static NSMutableDictionary *categoryDict;
 
 - (void)getWordsByPartOfWords: (NSString *)partOfWord
 {
-    NSString * selectSql = [NSString stringWithFormat:@"select word from words where word like '%@%%'",partOfWord];
-    FMResultSet *result = [dictDataBase executeQuery:selectSql];
+    if ([partOfWord length] == 0)
+    {
+        self.dictArray = [self.backupDictArray mutableCopy];
+        return;
+    }
+    
     if (self.dictArray == nil)
     {
         self.dictArray = [[NSMutableArray alloc]init];
@@ -269,18 +285,14 @@ static NSMutableDictionary *categoryDict;
         [self.dictArray removeAllObjects];
     }
     
-    while ([result next])
+    for (Word * tmpWord in self.backupDictArray)
     {
-        NSString * word = [result stringForColumn:@"word"];
-        Word * tmpWord = [allDict objectForKey:word];
-        
-        if (tmpWord == nil)
+        if ([tmpWord.word hasPrefix:partOfWord])
         {
-            NSLog(@"%@",word);
+            [self.dictArray addObject:tmpWord];
         }
-        [self.dictArray addObject:tmpWord];
     }
-    
+        
     [self.dictArray sortUsingSelector:@selector(compareName:)];
 }
 
@@ -313,6 +325,7 @@ static NSMutableDictionary *categoryDict;
     }
     //[self.dictArray sortUsingSelector:@selector(compareName:)];
     [self.dictArray sortUsingSelector:@selector(compareProgress:)];
+    self.backupDictArray = [self.dictArray mutableCopy];
 }
 
 
@@ -457,11 +470,11 @@ static NSMutableDictionary *categoryDict;
         NSLog(@"category.categoryName : %@",category.categoryName);
         [category updateMemCategoryProgressbyWordProgress:totalCurrentProgress withLength:length];
         [self updateCategoryProgress:categoryid withCategoryProgress:totalCurrentProgress];
+        NSLog(@"totalCurrentProgress : %d",totalCurrentProgress);
     }
     else //random wordlist
     {
 #pragma mark todo
-        
     }
 }
 

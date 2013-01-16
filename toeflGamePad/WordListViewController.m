@@ -208,7 +208,9 @@ static NSString * const WordCellIdentifier = @"WordCell";
 {
     if ([searchText length] == 0)
     {
-        [dicthelper getWordsByType:self.segmentedControl.selectedSegmentIndex];
+        //[dicthelper getWordsByType:self.segmentedControl.selectedSegmentIndex];
+        //NSLog(@"i am here length = 0");
+        [self handleSearchForTerm:searchText];
         [self.tableView reloadData];
     }
     else

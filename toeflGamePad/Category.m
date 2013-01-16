@@ -29,9 +29,15 @@
 
 - (void)updateMemCategoryProgressbyWordProgress : (int)totalCurrentProgress withLength : (int)length
 {
-    NSLog(@"totalCurrentProgress : %d",totalCurrentProgress);
+    //NSLog(@"totalCurrentProgress : %d",totalCurrentProgress);
     self.progress = totalCurrentProgress * 1.0 / (50 * length);
-    NSLog(@"self.progress : %f",self.progress);
+    //NSLog(@"self.progress : %f",self.progress);
+    /*
+    if (totalCurrentProgress == 120)
+    {
+        NSLog(@"self.progress : %f",self.progress);
+    }
+    */
 }
 
 

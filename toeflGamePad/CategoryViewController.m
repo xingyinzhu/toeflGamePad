@@ -67,18 +67,18 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             progress.progress = category.progress;
         }
     }
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"testing in viewWillAppear");
+    [super viewWillAppear:animated];
     [self updateCategoryProgressinView];
 }
 
 - (void)viewDidLoad
 {
+    NSLog(@"testing in viewDidLoad");
     [super viewDidLoad];
     
     self.scrollView.contentSize = CGSizeMake(1000, self.scrollView.bounds.size.height);
@@ -93,7 +93,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     {
         if (hasReviewedNumber == 0)
         {
-            
+#pragma mark todo alertview
         }
     }
     categoryNumber = [[DictHelper instanceCategoryDict] count];
@@ -144,13 +144,13 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     for (NSNumber *attribute_id in attributeids)
     {
         Category * category = [[DictHelper instanceCategoryDict] objectForKey:attribute_id];
-        if (category.progress == hasNotReviewed)
+        if (category.progress < hasReviewed)
         {
             continue;
         }
         
         NSLog(@"category.categoryName : %@",category.categoryName);
-        NSLog(@"category.categoryName : %f",category.progress);
+        NSLog(@"category.progress : %f",category.progress);
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(column*itemWidth + marginHorz, row*itemHeight + marginVert, buttonWidth, buttonHeight);
@@ -164,6 +164,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
         progress.progress = category.progress;
+        //NSLog(@"category.progress : %f",category.progress);
         [button addSubview:progress];
         
         
@@ -228,6 +229,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         UIProgressView * progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
         progress.frame = CGRectMake(0*itemWidth + 15, 0*itemHeight + 60, 50, 1);
         progress.progress = category.progress;
+        //NSLog(@"category.progress : %f",category.progress);
         [button addSubview:progress];
         
         NSInteger attributeInt = [attribute_id integerValue];
