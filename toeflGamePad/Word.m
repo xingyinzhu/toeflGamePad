@@ -65,7 +65,7 @@
 
 - (NSString *)showInitPartWord;
 {
-    showLength = self.word.length * 0.25;
+    showLength = ceil(self.word.length * 0.25);
     hideLength = self.word.length - showLength;
     
     return [self configureWordByShowLengthAndHideLength];
@@ -75,8 +75,8 @@
 - (NSString *)giveOneHint: (NSString *)currentWord
 {
     //NSUInteger currentLength = currentWord.length;
-    
-    if (showLength + 1 < [self.word length] * 0.75)
+    int terminateLength = ceil([self.word length] * 0.75);
+    if (showLength + 1 < terminateLength)
     {
         showLength ++;
         hideLength --;

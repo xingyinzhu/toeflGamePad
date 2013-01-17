@@ -23,4 +23,6 @@ typedef enum
 
 - (void)updateMemCategoryProgressbyWordProgress : (int)totalCurrentProgress withLength : (int)length;
 
+- (BOOL)updateCategoryProgressByOneScore : (int)score withLength : (int)length;
+
 @end

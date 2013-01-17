@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EffectLabel.h"
 
 @interface GamePadViewController : UIViewController<UIAlertViewDelegate>
 
@@ -18,7 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIButton * accept;
 @property (nonatomic, weak) IBOutlet UIButton * reject;
 
-@property (nonatomic, weak) IBOutlet UILabel * word;
+@property (nonatomic, weak) IBOutlet EffectLabel * word;
 @property (nonatomic, weak) IBOutlet UILabel * mark;
 @property (nonatomic, weak) IBOutlet UILabel * meangings;
 

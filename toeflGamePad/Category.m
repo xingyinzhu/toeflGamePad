@@ -40,5 +40,19 @@
     */
 }
 
+- (BOOL)updateCategoryProgressByOneScore : (int)score withLength : (int)length
+{
+    if (self.progress >= 1.0)
+    {
+        return NO;
+    }
+    else
+    {
+        float delta = score * 1.0 / (50 * length);
+        self.progress += delta;
+        NSLog(@"in updateCategoryProgressByOneScore : %f",self.progress);
+        return YES;
+    }
+}
 
 @end

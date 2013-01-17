@@ -78,18 +78,29 @@
         isFinished[i] = [NSNumber numberWithBool:NO];
     }
     
-    
+    /*
     for (int i = 0; i < totalNumber; i++)
     {
         Word *tmp = [testWords objectAtIndex:i];
         NSLog(@"%@",tmp.word);
     }
+    */
+    
+}
+- (void)initAnimation
+{
+    self.word.font = [UIFont boldSystemFontOfSize:24];
+    self.word.textColor = [UIColor colorWithWhite:0.2 alpha:1];
+    self.word.shadowColor = [UIColor colorWithWhite:1 alpha:0.75];
+    self.word.shadowOffset = CGSizeMake(0, 1);
+    self.word.transitionDuration = 0.75;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self GamePadInit];
+    [self initAnimation];
     [self prepareForGamePad];
 }
 
@@ -97,6 +108,7 @@
 - (IBAction)giveOneHint
 {
     BOOL isfinish = [[isFinished objectAtIndex:currentWordIndex]boolValue];
+    
     if (isfinish == NO)
     {
 
@@ -110,17 +122,19 @@
                                                 delegate:self
                                                 cancelButtonTitle:nil
                                                 otherButtonTitles:@"Ok", nil];
+            [noHintAlertView setTag:3];
             [noHintAlertView show];
         }
         else
         {
             NSLog(@"%@",hintWord);
             currentWord = hintWord;
-            self.word.text = currentWord;
+            self.word.transitionEffect = EffectLabelTransitionCustom;
+            [self.word setText:currentWord animated:YES];
             [self lowerScore4CurrentWord:2];
+            
         }
     }
-    
 }
 
 - (IBAction)showPreviousWord
@@ -137,6 +151,7 @@
 
 - (void)prepareForGamePad
 {
+    
     if ([testWords count] == 0)
     {
         UIAlertView * finfishedAlertView = [[UIAlertView alloc]
@@ -153,9 +168,11 @@
     {
         Word * tmp = [testWords objectAtIndex:currentWordIndex];
         currentWord = [tmp showInitPartWord];
-        self.word.text = currentWord;
-        //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
         [self.word setTextColor:[UIColor whiteColor]];
+        self.word.transitionEffect = EffectLabelTransitionCustom;
+        [self.word setText:currentWord animated:YES];
+        //self.word.text = currentWord;
+        //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
         self.mark.text = @"";
         self.meangings.text = tmp.meanings;
     }
@@ -196,11 +213,16 @@
 {
     Word * tmp = [testWords objectAtIndex:currentWordIndex];
 #pragma mark to do transition mode
-    self.word.text = tmp.word;
+    //self.word.text = tmp.word;
     //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
-    [self.word setTextColor:[UIColor yellowColor]];
+    //[self.word setTextColor:[UIColor yellowColor]];
+    
     self.mark.text = [tmp configureForMark];
     [self.mark setTextColor:[UIColor yellowColor]];
+    
+    [self.word setTextColor:[UIColor yellowColor]];
+    self.word.transitionEffect = EffectLabelTransitionScaleFadeOut;
+    [self.word setText:tmp.word animated:YES];
 }
 
 - (IBAction)acceptAnswer
@@ -294,6 +316,14 @@
             [self updateScore];
             [DictHelper updateProgress:score withWordArray:testWords withCategoryId:wordGroupInt];
             [self exitGamePad];
+        }
+    }
+    else if (alertView.tag == 3)
+    {
+        if (buttonIndex == 0)
+        {
+            self.word.transitionEffect = EffectLabelTransitionCustom;
+            [self.word setText:currentWord animated:YES];
         }
     }
 }

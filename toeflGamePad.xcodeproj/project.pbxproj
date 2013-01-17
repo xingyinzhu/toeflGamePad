@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50273510169BFBE300999F41 /* toefl.html in Resources */ = {isa = PBXBuildFile; fileRef = 5027350F169BFBE300999F41 /* toefl.html */; };
+		506D5B9316A78D1B00BD842C /* EffectLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B9216A78D1A00BD842C /* EffectLabel.m */; };
 		507EFBFD1691255C000967E3 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBEF1691255C000967E3 /* back.png */; };
 		507EFBFE1691255C000967E3 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBF01691255C000967E3 /* back@2x.png */; };
 		507EFBFF1691255C000967E3 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 507EFBF11691255C000967E3 /* check.png */; };
@@ -71,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		5027350F169BFBE300999F41 /* toefl.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = toefl.html; path = ../toefl.html; sourceTree = "<group>"; };
+		506D5B9116A78D1A00BD842C /* EffectLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectLabel.h; sourceTree = "<group>"; };
+		506D5B9216A78D1A00BD842C /* EffectLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectLabel.m; sourceTree = "<group>"; };
 		507EFBEF1691255C000967E3 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		507EFBF01691255C000967E3 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		507EFBF11691255C000967E3 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				BEB431991693391D0014E73D /* NSMutableArray+Shuffling.m */,
 				BEEBBE06169444A4007E510E /* UIImage+Resize.h */,
 				BEEBBE07169444A4007E510E /* UIImage+Resize.m */,
+				506D5B9116A78D1A00BD842C /* EffectLabel.h */,
+				506D5B9216A78D1A00BD842C /* EffectLabel.m */,
 				BEEF66B31680926500DFD157 /* Supporting Files */,
 			);
 			path = toeflGamePad;
@@ -423,6 +428,7 @@
 				BEB4319A1693391E0014E73D /* NSMutableArray+Shuffling.m in Sources */,
 				BEEBBE08169444A4007E510E /* UIImage+Resize.m in Sources */,
 				BEE9CAF616991A8A00816726 /* Category.m in Sources */,
+				506D5B9316A78D1B00BD842C /* EffectLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

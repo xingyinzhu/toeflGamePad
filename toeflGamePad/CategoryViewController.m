@@ -59,11 +59,11 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             Category * category = [[DictHelper instanceCategoryDict]objectForKey:attribute_id];
             //[1] is UIProgressView
             UIProgressView * progress  = (UIProgressView *)[btn subviews][1];
-            if (category.progress > 0.01)
-            {
-                NSLog(@"%@",category.categoryName);
-                NSLog(@"%f",category.progress);
-            }
+            //if (category.progress > 0.01)
+            //{
+                //NSLog(@"%@",category.categoryName);
+                //NSLog(@"%f",category.progress);
+            //}
             progress.progress = category.progress;
         }
     }
@@ -93,6 +93,8 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     {
         if (hasReviewedNumber == 0)
         {
+#pragma mark todo
+            /*
             UIAlertView * noTestCategoryAlertView = [[UIAlertView alloc]
                                                      initWithTitle:@"No Test Items"
                                                      message:@"You should review items in review mode!"
@@ -101,6 +103,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
                                                      otherButtonTitles:@"Ok", nil];
             [noTestCategoryAlertView setTag:1];
             [noTestCategoryAlertView show];
+            */
         }
     }
     categoryNumber = [[DictHelper instanceCategoryDict] count];
@@ -159,8 +162,8 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             continue;
         }
         
-        NSLog(@"category.categoryName : %@",category.categoryName);
-        NSLog(@"category.progress : %f",category.progress);
+        //NSLog(@"category.categoryName : %@",category.categoryName);
+        //NSLog(@"category.progress : %f",category.progress);
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(column*itemWidth + marginHorz, row*itemHeight + marginVert, buttonWidth, buttonHeight);
@@ -192,7 +195,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
             column ++;
         }
     }
-    
+    NSLog(@"hasReviewedNumber : %d",hasReviewedNumber);
     int numPages = ceilf(hasReviewedNumber / 18.0f);
     self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
     self.pageControl.numberOfPages = numPages;
