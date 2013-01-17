@@ -37,4 +37,5 @@
 
 + (void)updateProgress: (NSMutableArray *)progress withWordArray: (NSMutableArray *)wordArray withCategoryId : (NSInteger)categoryid;
 
++ (void)restartCategory: (NSInteger)categoryid;
 @end

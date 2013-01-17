@@ -151,17 +151,18 @@
 
 - (void)prepareForGamePad
 {
-    
+    //category.progress = 1.0f
+    //already finished
     if ([testWords count] == 0)
     {
-        UIAlertView * finfishedAlertView = [[UIAlertView alloc]
+        UIAlertView * aFinishedAlertView = [[UIAlertView alloc]
                                             initWithTitle:@"Finished"
-                                            message:@"Congratulations!"
+                                            message:@"Already Finished this Category!"
                                             delegate:self
-                                            cancelButtonTitle:nil
-                                            otherButtonTitles:@"Ok", nil];
-        [finfishedAlertView setTag:1];
-        [finfishedAlertView show];
+                                            cancelButtonTitle:@"Quit"
+                                            otherButtonTitles:@"Restart", nil];
+        [aFinishedAlertView setTag:5];
+        [aFinishedAlertView show];
 
     }
     else
@@ -173,6 +174,7 @@
         [self.word setText:currentWord animated:YES];
         //self.word.text = currentWord;
         //[self.word setFont:[UIFont fontWithName:@"Knewave" size:24.0f]];
+        [self.word setTextColor:[UIColor blackColor]];
         self.mark.text = @"";
         self.meangings.text = tmp.meanings;
     }
@@ -218,9 +220,9 @@
     //[self.word setTextColor:[UIColor yellowColor]];
     
     self.mark.text = [tmp configureForMark];
-    [self.mark setTextColor:[UIColor yellowColor]];
+    [self.mark setTextColor:[UIColor redColor]];
     
-    [self.word setTextColor:[UIColor yellowColor]];
+    [self.word setTextColor:[UIColor redColor]];
     self.word.transitionEffect = EffectLabelTransitionScaleFadeOut;
     [self.word setText:tmp.word animated:YES];
 }
@@ -324,6 +326,18 @@
         {
             self.word.transitionEffect = EffectLabelTransitionCustom;
             [self.word setText:currentWord animated:YES];
+        }
+    }
+    else if (alertView.tag == 5)
+    {
+        if (buttonIndex == 0)
+        {
+            [self exitGamePad];
+        }
+        else if (buttonIndex == 1)
+        {
+            [DictHelper restartCategory:wordGroupInt];
+            [self exitGamePad];
         }
     }
 }

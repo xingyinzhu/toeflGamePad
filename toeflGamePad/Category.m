@@ -30,8 +30,16 @@
 - (void)updateMemCategoryProgressbyWordProgress : (int)totalCurrentProgress withLength : (int)length
 {
     //NSLog(@"totalCurrentProgress : %d",totalCurrentProgress);
-    self.progress = totalCurrentProgress * 1.0 / (50 * length);
-    //NSLog(@"self.progress : %f",self.progress);
+    float progress = totalCurrentProgress * 1.0 / (50 * length);
+    if (progress >= 1.0f)
+    {
+        NSLog(@"i am here : %f",progress);
+        self.progress = 1.0f;    //NSLog(@"self.progress : %f",self.progress);
+    }
+    else
+    {
+        self.progress = progress;
+    }
     /*
     if (totalCurrentProgress == 120)
     {
@@ -42,7 +50,7 @@
 
 - (BOOL)updateCategoryProgressByOneScore : (int)score withLength : (int)length
 {
-    if (self.progress >= 1.0)
+    if (self.progress >= 1.0 || score == 0)
     {
         return NO;
     }

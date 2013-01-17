@@ -124,6 +124,11 @@ static NSMutableDictionary *categoryDict;
             NSInteger progress = [result intForColumn:@"progress"];
           
             Category * category = [[Category alloc]init];
+            if (attribute_id == 166 || attribute_id == 4)
+            {
+                NSLog(@"%@",attribute_name);
+                NSLog(@"progress : %d , count : %d",progress,count);
+            }
             [category updateMemCategoryProgressbyWordProgress:progress withLength:count];
             category.categoryName = attribute_name;
             [categoryDict setObject:category forKey:aWrappedId];
@@ -141,7 +146,7 @@ static NSMutableDictionary *categoryDict;
     NSString * updateSql;
     updateSql = [NSString stringWithFormat:@"update attribute_id set progress = %d where attributeid = %d",progress,categoryid];
     
-    NSLog(@"%@",updateSql);
+    NSLog(@"in updateCategoryProgress : %@",updateSql);
     success =  [dictDataBase executeUpdate:updateSql];
 
     if (success)
@@ -177,7 +182,7 @@ static NSMutableDictionary *categoryDict;
         NSNumber *aWrappedId = [NSNumber numberWithInteger:type];
         Category * category = [categoryDict objectForKey:aWrappedId];
         category.progress = hasReviewed;
-        NSLog(@"%@",updateSql);
+        NSLog(@"in updateHasReviewed : %@",updateSql);
         if (success)
         {
             NSLog(@"updateHasReviewed %d successfully!",type);
@@ -401,7 +406,7 @@ static NSMutableDictionary *categoryDict;
     NSString * updateSql;
     NSString * selectSql;
     BOOL success;
-    int totalCurrentProgress = 0;
+    int totalProgress = 0;
     
     for (int i = 0; i < length ; i++)
     {
@@ -426,7 +431,7 @@ static NSMutableDictionary *categoryDict;
         
         NSLog(@"update mem progress : %d",tmpWord.progress);
         
-        totalCurrentProgress += tmp.progress;
+        totalProgress += tmp.progress;
         
         if (success)
         {
@@ -446,8 +451,8 @@ static NSMutableDictionary *categoryDict;
         Category *category = [categoryDict objectForKey:categoryId];
     
         //NSLog(@"category.categoryName : %@",category.categoryName);
-        [category updateMemCategoryProgressbyWordProgress:totalCurrentProgress withLength:length];
-        [self updateCategoryProgress:categoryid withCategoryProgress:totalCurrentProgress];
+        [category updateMemCategoryProgressbyWordProgress:totalProgress withLength:length];
+        [self updateCategoryProgress:categoryid withCategoryProgress:totalProgress];
         //NSLog(@"totalCurrentProgress : %d",totalCurrentProgress);
     }
     else //random wordlist
@@ -487,6 +492,7 @@ static NSMutableDictionary *categoryDict;
         if (addProgress)
         {
             updateSql = [NSString stringWithFormat:@"update attribute_id set progress=progress+%d where attributeid = %d",[progress[i] integerValue],group];
+            NSLog(@"in updateRandomProgressbyWordProgress : %@",updateSql);
             success =  [dictDataBase executeUpdate:updateSql];
             if (success)
             {
@@ -502,5 +508,49 @@ static NSMutableDictionary *categoryDict;
     
 }
 
++ (void)restartCategory: (NSInteger)categoryid
+{
+    //update category
+    NSString * updateSql = [NSString stringWithFormat:@"update attribute_id set progress = 0 where attributeid = %d",categoryid];
+    NSLog(@"in restartCategory : %@",updateSql);
+    BOOL success =  [dictDataBase executeUpdate:updateSql];
+    if (success)
+    {
+        //[dictDataBase commit];
+    }
+    else
+    {
+        NSLog(@"FAIL");
+    }
+
+    NSNumber * numberId = [NSNumber numberWithInt:categoryid];
+    Category * category = [categoryDict objectForKey:numberId];
+    category.progress = 0.0f;
+    
+    //update all words
+    
+    NSString * selectSql = [NSString stringWithFormat:@"select * from attribute where groups = %d",categoryid];
+    FMResultSet * wordResults = [dictDataBase executeQuery:selectSql];
+    while ([wordResults next])
+    {
+        NSString * wordname = [wordResults stringForColumn:@"word"];
+        updateSql = [NSString stringWithFormat:@"update progress set value = 0 where word = '%@'",wordname];
+        
+        success =  [dictDataBase executeUpdate:updateSql];
+        if (success)
+        {
+            //[dictDataBase commit];
+        }
+        else
+        {
+            NSLog(@"FAIL");
+        }
+
+        Word * tmpWord = [allDict objectForKey:wordname];
+        tmpWord.progress = 0;
+    }
+    
+    
+}
 
 @end

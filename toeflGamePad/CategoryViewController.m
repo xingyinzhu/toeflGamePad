@@ -123,6 +123,17 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     {
         [self backtoStartView];
     }
+    else
+    {
+        if (buttonIndex == 0)
+        {
+        }
+        else if (buttonIndex == 1)
+        {
+            //[DictHelper restartCategory:wordGroupInt];
+        }
+    }
+
 }
 
 - (void)addRandomButton
@@ -184,7 +195,13 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         NSInteger attributeInt = [attribute_id integerValue];
         button.tag = 2000 + attributeInt;
         
+        //点击一下
         [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        //长按事件
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(buttonLongPressed:)];
+        longPress.minimumPressDuration = 0.8; //定义按的时间
+        [button addGestureRecognizer:longPress];
+        
         [self.scrollView addSubview:button];
         
         index ++;
@@ -276,6 +293,22 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         
         [DictHelper updateHasReviewed:categoryid];
         [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+}
+
+-(void)buttonLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan)
+    {
+        NSLog(@"长按事件");
+        UIAlertView * aFinishedAlertView = [[UIAlertView alloc]
+                                            initWithTitle:@"Restart"
+                                            message:@"Do you want to Restart?"
+                                            delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                            otherButtonTitles:@"Restart", nil];
+        [aFinishedAlertView setTag:4];
+        [aFinishedAlertView show];
     }
 }
 
