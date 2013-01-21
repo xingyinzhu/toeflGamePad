@@ -18,7 +18,7 @@ typedef enum
 }toeflMode;
 
 @property (nonatomic, assign) toeflMode myToeflMode;
-
+@property (nonatomic, weak) NSString * device_name;
 
 - (IBAction)backtoStartView;
 

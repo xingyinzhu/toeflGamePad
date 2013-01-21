@@ -17,19 +17,13 @@
 {
     [self startLoadDict];
     
-    
-    UIDevice * d = [[UIDevice alloc]init];
-    
-    NSString * a = [d platform];
-    NSString * b = [d hwmodel];
-    NSString * c = [d platformString];
-    NSLog(@"%@",a);
-    NSLog(@"%@",b);
-    NSLog(@"%@",c);
-    
+    UIDevice * device = [[UIDevice alloc]init];
+    NSString * platformString = [device platformString];
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[StartViewController alloc] initWithNibName:@"StartViewController" bundle:nil];
+    self.viewController.device_name = platformString;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

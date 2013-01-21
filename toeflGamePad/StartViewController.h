@@ -16,6 +16,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *testmark;
 
+@property (nonatomic, weak) NSString * device_name;
+
 - (IBAction)newReview;
 - (IBAction)newTest;
 - (IBAction)howTo;

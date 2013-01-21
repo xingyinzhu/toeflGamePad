@@ -36,11 +36,16 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     NSInteger categoryNumber;
     NSInteger hasReviewedNumber;
     DictHelper *dicthelper;
+    int pageCol;
+    int pageRow;
+    double currentWindowsWidth;
+    double currentWindowsHeight;
 }
 
 @synthesize scrollView = _scrollView;
 @synthesize pageControl = _pageControll;
 @synthesize myToeflMode = _myToeflGamePadMode;
+@synthesize device_name = _device_name;
 
 - (void)updateCategoryProgressinView
 {
@@ -69,6 +74,27 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     }
 }
 
+- (void)configureForDevice
+{
+    pageRow = 3;
+    
+    if ([self.device_name hasPrefix:@"iPhone 5"] || [self.device_name hasPrefix:@"iPod touch 5"])
+    {
+        pageCol = 7;
+    }
+    else if ([self.device_name hasPrefix:@"iPhone 4"] || [self.device_name hasPrefix:@"iPod touch 4"])
+    {
+        pageCol = 6;
+    }
+    else
+    {
+        pageCol = 6;
+    }
+
+    currentWindowsWidth = [[UIScreen mainScreen] bounds].size.width;
+    currentWindowsHeight = [[UIScreen mainScreen] bounds].size.height;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"testing in viewWillAppear");
@@ -80,6 +106,8 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 {
     NSLog(@"testing in viewDidLoad");
     [super viewDidLoad];
+    
+    [self configureForDevice];
     
     self.scrollView.contentSize = CGSizeMake(1000, self.scrollView.bounds.size.height);
     
@@ -209,21 +237,22 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         
         index ++;
         row++;
-        if (row == 3)
+        if (row == pageRow)
         {
             row = 0;
             column ++;
         }
     }
     NSLog(@"hasReviewedNumber : %d",hasReviewedNumber);
-    int numPages = ceilf(hasReviewedNumber / 18.0f);
-    self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
+    int numPages = ceilf(hasReviewedNumber * 1.0f / (pageRow * pageCol));
+    self.scrollView.contentSize = CGSizeMake(numPages*currentWindowsHeight, self.scrollView.bounds.size.height);
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
 }
 
 - (void)tileCategoryButton4ReviewMode
 {
+    NSLog(@"in tileCategoryButton4ReviewMode : pageRow = %d pageCol = %d",pageRow,pageCol);
     int index = 0;
     int row = 0;
     int column = 0;
@@ -262,7 +291,7 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
         
         index ++;
         row++;
-        if (row == 3)
+        if (row == pageRow)
         {
             row = 0;
             column ++;
@@ -270,8 +299,8 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
 
     }
     
-    int numPages = ceilf(categoryNumber / 18.0f);
-    self.scrollView.contentSize = CGSizeMake(numPages*480.0f, self.scrollView.bounds.size.height);
+    int numPages = ceilf(categoryNumber * 1.0f / (pageRow * pageCol));
+    self.scrollView.contentSize = CGSizeMake(numPages*currentWindowsHeight, self.scrollView.bounds.size.height);
     self.pageControl.numberOfPages = numPages;
     self.pageControl.currentPage = 0;
 }

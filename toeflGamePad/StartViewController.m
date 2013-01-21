@@ -26,6 +26,7 @@
 @synthesize testButton = _testButton;
 @synthesize howtoButton = _howtoButton;
 @synthesize testmark = _testmark;
+@synthesize device_name = _device_name;
 
 - (IBAction)newTest
 {
@@ -35,6 +36,7 @@
     //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     categoryViewController.myToeflMode = toeflTestMode;
+    categoryViewController.device_name = self.device_name;
     [self presentViewController:categoryViewController animated:YES completion:nil];
 }
 
@@ -56,6 +58,7 @@
     //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     categoryViewController.myToeflMode = toeflReviewMode;
+    categoryViewController.device_name = self.device_name;
     [self presentViewController:categoryViewController animated:YES completion:nil];
 }
 
