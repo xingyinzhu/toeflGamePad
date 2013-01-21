@@ -225,6 +225,17 @@
     [self.word setTextColor:[UIColor redColor]];
     self.word.transitionEffect = EffectLabelTransitionScaleFadeOut;
     [self.word setText:tmp.word animated:YES];
+    
+    [self.answer setEnabled:NO];
+    //[self.answer setHidden:NO];
+    /*
+    [self.hint setHidden:NO];
+    [self.next setHidden:NO];
+    [self.back setHidden:NO];
+    [self.hint setEnabled:NO];
+    [self.next setEnabled:NO];
+    [self.back setEnabled:NO];
+    */
 }
 
 - (IBAction)acceptAnswer
@@ -248,6 +259,15 @@
         else
         {
             [self showNextWord];
+            [self.answer setEnabled:YES];
+            /*
+            [self.hint setHidden:YES];
+            [self.next setHidden:YES];
+            [self.back setHidden:YES];
+            [self.hint setEnabled:YES];
+            [self.next setEnabled:YES];
+            [self.back setEnabled:YES];
+            */
         }
     }
 }
@@ -260,6 +280,15 @@
         [self lowerScore4CurrentWord:4];
     }
     [self showNextWord];
+    [self.answer setEnabled:YES];
+    /*
+    [self.hint setHidden:YES];
+    [self.next setHidden:YES];
+    [self.back setHidden:YES];
+    [self.hint setEnabled:YES];
+    [self.next setEnabled:YES];
+    [self.back setEnabled:YES];
+    */
 }
 
 - (void)lowerScore4CurrentWord: (NSInteger)ration

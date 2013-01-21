@@ -76,6 +76,22 @@ static NSMutableDictionary *categoryDict;
     }
 }
 
++ (void)closeDataBase
+{
+    if (dictDataBase != nil)
+    {
+        if (![dictDataBase close])
+        {
+            NSLog(@"Close dict failed!");
+            return;
+        }
+        else
+        {
+            NSLog(@"Close dict ok!");
+        }
+    }
+}
+
 + (void)loadAllWordObejctIntoDict
 {
     if (allDict == nil)
@@ -134,6 +150,7 @@ static NSMutableDictionary *categoryDict;
             [categoryDict setObject:category forKey:aWrappedId];
         }
     }
+    //[categoryDict ]
     
     NSUInteger hasReviewedNumber = [dictDataBase intForQuery:@"select count(*) from attribute_id where progress >= 0"];
     return hasReviewedNumber;

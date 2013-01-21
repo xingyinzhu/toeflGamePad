@@ -29,7 +29,10 @@
 
 - (IBAction)newTest
 {
+    //if (categoryViewController == nil)
+    //{
     categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];
+    //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     categoryViewController.myToeflMode = toeflTestMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];
@@ -40,14 +43,17 @@
     if (aboutViewController == nil)
     {
         aboutViewController = [[AboutViewController alloc]initWithNibName:@"AboutViewController" bundle:nil];
-        aboutViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:aboutViewController animated:YES completion:nil];
     }
+    aboutViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:aboutViewController animated:YES completion:nil];
 }
 
 - (IBAction)newReview
 {
+    //if (categoryViewController == nil)
+    //{
     categoryViewController = [[CategoryViewController alloc]initWithNibName:@"CategoryViewController" bundle:nil];
+    //}
     categoryViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     categoryViewController.myToeflMode = toeflReviewMode;
     [self presentViewController:categoryViewController animated:YES completion:nil];

@@ -9,12 +9,24 @@
 #import "AppDelegate.h"
 #import "DictHelper.h"
 #import "StartViewController.h"
+#import "UIDevice+Hardware.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self startLoadDict];
+    
+    /*
+    UIDevice * d = [[UIDevice alloc]init];
+    
+    NSString * a = [d platform];
+    NSString * b = [d hwmodel];
+    NSString * c = [d platformString];
+    NSLog(@"%@",a);
+    NSLog(@"%@",b);
+    NSLog(@"%@",c);
+    */
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -49,6 +61,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [DictHelper closeDataBase];
 }
 
 - (void)startLoadDict

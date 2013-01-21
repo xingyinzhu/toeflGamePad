@@ -123,14 +123,17 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     {
         [self backtoStartView];
     }
-    else
+    else    //restart long pressed category
     {
+        
         if (buttonIndex == 0)
         {
+            //cancel do nothing
         }
         else if (buttonIndex == 1)
         {
-            //[DictHelper restartCategory:wordGroupInt];
+            [DictHelper restartCategory:alertView.tag];
+            [self updateCategoryProgressinView];
         }
     }
 
@@ -301,13 +304,19 @@ const CGFloat marginVert = (itemHeight - buttonHeight)/2.0f;
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan)
     {
         NSLog(@"长按事件");
+        //NSLog(@"%d",gestureRecognizer.)
+        UIView * view = gestureRecognizer.view;
+        //NSLog(@"in buttonLongPressed view.tag : %d",view.tag);
+        int categoryid = view.tag - 2000;
         UIAlertView * aFinishedAlertView = [[UIAlertView alloc]
                                             initWithTitle:@"Restart"
                                             message:@"Do you want to Restart?"
                                             delegate:self
                                             cancelButtonTitle:@"Cancel"
                                             otherButtonTitles:@"Restart", nil];
-        [aFinishedAlertView setTag:4];
+        //pass the parameter : categoryid through alert.tag
+        [aFinishedAlertView setTag:categoryid];
+        //[aFinishedAlertView set]
         [aFinishedAlertView show];
     }
 }
