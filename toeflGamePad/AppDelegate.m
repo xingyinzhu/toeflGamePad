@@ -17,7 +17,7 @@
 {
     [self startLoadDict];
     
-    /*
+    
     UIDevice * d = [[UIDevice alloc]init];
     
     NSString * a = [d platform];
@@ -26,7 +26,6 @@
     NSLog(@"%@",a);
     NSLog(@"%@",b);
     NSLog(@"%@",c);
-    */
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

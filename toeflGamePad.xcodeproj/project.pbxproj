@@ -497,10 +497,12 @@
 		BEEF66CD1680926500DFD157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: cao gen (C8235WR22X)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "toeflGamePad/toeflGamePad-Prefix.pch";
 				INFOPLIST_FILE = "toeflGamePad/toeflGamePad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "51D312C4-246C-4843-B3C5-CB5925A676AF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

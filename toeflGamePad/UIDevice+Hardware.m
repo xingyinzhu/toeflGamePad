@@ -125,6 +125,7 @@
     if ([platform hasPrefix:@"iPod2"])              return UIDevice2GiPod;
     if ([platform hasPrefix:@"iPod3"])              return UIDevice3GiPod;
     if ([platform hasPrefix:@"iPod4"])              return UIDevice4GiPod;
+    if ([platform hasPrefix:@"iPod5"])              return UIDevice5GiPod;
     
     // iPad
     if ([platform hasPrefix:@"iPad1"])              return UIDevice1GiPad;
@@ -173,6 +174,7 @@
         case UIDevice2GiPad : return IPAD_2G_NAMESTRING;
         case UIDevice3GiPad : return IPAD_3G_NAMESTRING;
         case UIDevice4GiPad : return IPAD_4G_NAMESTRING;
+        case UIDevice5GiPod : return IPAD_5G_NAMESTRING;
         case UIDeviceUnknowniPad : return IPAD_UNKNOWN_NAMESTRING;
             
         case UIDeviceAppleTV2 : return APPLETV_2G_NAMESTRING;
